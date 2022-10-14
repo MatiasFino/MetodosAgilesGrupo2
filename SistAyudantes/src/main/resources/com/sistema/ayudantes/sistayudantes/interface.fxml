@@ -1,16 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
+    <children>
+        <AnchorPane fx:id="principalPanel" prefHeight="400.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="69.0" fitWidth="274.0" layoutX="172.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/LogoExactas.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="subjectsButton" contentDisplay="CENTER" layoutX="212.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#onSubjectsButtonClicked" prefHeight="26.0" prefWidth="176.0" text="Ver lista de materias" textAlignment="JUSTIFY">
+                    <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                    </font></Button>
+                <Label layoutX="45.0" layoutY="101.0" prefHeight="50.0" prefWidth="510.0" text="Asignación de ayudantes interinos" textFill="#404040" textOverrun="CLIP">
+                    <font>
+                        <Font name="HoloLens MDL2 Assets" size="34.0" />
+                    </font>
+                </Label>
+                <Button layoutX="247.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#onExitButtonClicked" prefHeight="17.0" prefWidth="74.0" text="Salir" />
+                <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                    <image>
+                        <Image url="@images/back.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="subjectsPanel" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" visible="false">
+            <children>
+                <Accordion layoutX="157.0" layoutY="157.0" prefHeight="69.0" prefWidth="265.0">
+                    <panes>
+                        <TitledPane animated="false" text="AYDA1">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Objetos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" prefHeight="175.0" prefWidth="333.0" text="FEYPI xd">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </TitledPane>
+                    </panes>
+                </Accordion>
+                <Button fx:id="back1" layoutX="263.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="50.0" prefWidth="65.0" text="Volver atras" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="assistantsPanel" prefHeight="400.0" prefWidth="600.0" visible="false">
+            <children>
+                <Button fx:id="back" layoutX="268.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#onBackSubjectsPanelButtonClicked" prefHeight="37.0" prefWidth="65.0" text="Volver atras" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
