@@ -1,0 +1,28 @@
+#tituloAsignacion{
+    -fx-font-family: "sans-serif";
+}
+
+#subjectsButton{
+    -fx-font-family: "sans-serif";
+    -fx-background-color: D9D9D9;
+}
+
+#botonSalir {
+    -fx-font-family: "sans-serif";
+    -fx-background-color: D9D9D9;
+}
+
+#back1{
+    -fx-background-color:  D9D9D9;
+    -fx-font-family: "sans-serif" ;
+}
+
+
+#volver_materia{
+    -fx-background-color:  D9D9D9;
+}
+
+#principalPanel{
+    -fx-background-image: url("/images/fondo.png");
+    -fx-background-color: white;
+}
