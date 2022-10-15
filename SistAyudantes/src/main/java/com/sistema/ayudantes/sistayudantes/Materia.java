@@ -6,9 +6,12 @@ public class Materia {
     private String nombre;
     private ArrayList<String> ayudantes;
 
+    private int cantidadAyudantes;
+
     public Materia(String nombre){
         this.nombre = nombre;
         this.ayudantes = new ArrayList<>();
+        this.cantidadAyudantes=0;
     }
 
     public String getNombre() {
@@ -31,5 +34,21 @@ public class Materia {
         if(!ayudantes.contains(ayudante)) {
             ayudantes.add(ayudante);
         }
+    }
+
+    public int cantidadAyudantes(){
+        return cantidadAyudantes;
+    }
+
+    public void setAyudantes(int cantidad){
+        this.cantidadAyudantes=cantidad;
+    }
+
+
+    public String estadoMateria(int cantidad){
+        if(cantidad < cantidadAyudantes){
+            return "Incompleto";
+        }
+        return "Completo";
     }
 }

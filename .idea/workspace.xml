@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed6156d3-19be-47c2-ad74-abd5919e1402" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/estilo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/images/exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/images/lista.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/images/volver.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/Materia.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/Materia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +62,7 @@
       <workItem from="1665791730442" duration="1738000" />
       <workItem from="1665800400163" duration="34000" />
       <workItem from="1665804624176" duration="11308000" />
-      <workItem from="1665843060283" duration="835000" />
+      <workItem from="1665843060283" duration="4204000" />
     </task>
     <servers />
   </component>

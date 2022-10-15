@@ -24,6 +24,10 @@ public class InterfaceController implements Initializable {
     @FXML private ComboBox assistants;
     @FXML private Label nameSubject;
 
+    @FXML private Text cantidadAyudantia;
+
+
+
     private ArrayList<Materia> subjectsList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,14 +41,17 @@ public class InterfaceController implements Initializable {
     public ArrayList<String> createStringList(){
         subjectsList = new ArrayList<>();
         Materia m1 = new Materia("Prog 1");
+        m1.setAyudantes(3); // en esta linea indico la cantidad de ayudantes que necesita la materia
         m1.addAyudante("Langoni");
         m1.addAyudante("Benedetto");
         m1.addAyudante("Varela");
         Materia m2 = new Materia("Analisis 1");
+        m2.setAyudantes(4);
         m2.addAyudante("Borja");
         m2.addAyudante("Armani");
         m2.addAyudante("Barco");
         Materia m3 = new Materia("Objetos");
+        m3.setAyudantes(5);
         m3.addAyudante("Messi");
         m3.addAyudante("Paredes");
         m3.addAyudante("Romero");
@@ -88,8 +95,12 @@ public class InterfaceController implements Initializable {
         for(int i=0;i<subjectsList.size();i++) {
             if (subjects.getValue().equals(subjectsList.get(i).getNombre())) {
                 ObservableList<String> a = FXCollections.observableList(subjectsList.get(i).getAyudantes());
+                int cantidad_ayudantes_actual=a.size(); //esta linea cuenta la cantidad actual de ayudantes
                 assistants.setItems(a);
                 nameSubject.setText(subjectsList.get(i).getNombre());
+                cantidadAyudantia.setText(subjectsList.get(i).getNombre() + " necesita una cantidad de "+subjectsList.get(i).cantidadAyudantes()+" ayudantes");
+
+
             }
         }
     }
