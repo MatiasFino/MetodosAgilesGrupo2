@@ -1,49 +1,53 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.ArrayList;
 
 public class Materia {
-    private String nombre;
-    private ArrayList<String> ayudantes;
+    private SimpleStringProperty nombre;
+    private ArrayList<Ayudante> ayudantes;
+    private int ayudantesNecesarios;
 
     private int cantidadAyudantes;
 
     public Materia(String nombre){
-        this.nombre = nombre;
+        this.nombre = new SimpleStringProperty(nombre);
         this.ayudantes = new ArrayList<>();
         this.cantidadAyudantes=0;
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.get();
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre.set(nombre);
     }
 
-    public ArrayList<String> getAyudantes() {
-        ArrayList<String> copia = new ArrayList<>();
+    public ArrayList<Ayudante> getAyudantes() {
+        ArrayList<Ayudante> copia = new ArrayList<>();
         for(int i=0;i<ayudantes.size();i++){
             copia.add(ayudantes.get(i));
         }
         return copia;
     }
 
-    public void addAyudante(String ayudante) {
+    public int cantAyudantesActuales(){
+        return getAyudantes().size();
+    }
+
+    public void addAyudante(Ayudante ayudante) {
         if(!ayudantes.contains(ayudante)) {
             ayudantes.add(ayudante);
         }
     }
-
-    public int cantidadAyudantes(){
-        return cantidadAyudantes;
+    public int getAyudantesNecesarios() {
+        return ayudantesNecesarios;
     }
-
-    public void setAyudantes(int cantidad){
-        this.cantidadAyudantes=cantidad;
+    public void setAyudantesNecesarios(int ayudantesNecesarios) {
+        this.ayudantesNecesarios = ayudantesNecesarios;
     }
-
 
     public String estadoMateria(int cantidad){
         if(cantidad < cantidadAyudantes){

@@ -17,6 +17,10 @@
     -fx-font-family: "sans-serif" ;
 }
 
+#viewAssistants{
+    -fx-background-color:  D9D9D9;
+    -fx-font-family: "sans-serif" ;
+}
 
 #volver_materia{
     -fx-background-color:  D9D9D9;
