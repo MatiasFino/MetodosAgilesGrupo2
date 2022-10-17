@@ -1,23 +1,20 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Label;
 
 public class Ayudante {
-    private SimpleStringProperty nombre;
+    private Label nombre;
 
     public Ayudante (String nombre){
-        this.nombre = new SimpleStringProperty(nombre);
+        this.nombre = new Label(nombre);
     }
 
     public String getNombre() {
-        return nombre.get();
-    }
-
-    public SimpleStringProperty nombreProperty() {
-        return nombre;
+        return nombre.getText();
     }
 
     public void setNombre(String nombre) {
-        this.nombre.set(nombre);
+        this.nombre.getText();
     }
 }

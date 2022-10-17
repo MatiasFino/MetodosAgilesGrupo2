@@ -1,28 +1,29 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 public class Materia {
-    private SimpleStringProperty nombre;
+    private Label nombre;
     private ArrayList<Ayudante> ayudantes;
     private int ayudantesNecesarios;
 
     private int cantidadAyudantes;
 
     public Materia(String nombre){
-        this.nombre = new SimpleStringProperty(nombre);
+        this.nombre = new Label(nombre);
         this.ayudantes = new ArrayList<>();
         this.cantidadAyudantes=0;
     }
 
     public String getNombre() {
-        return nombre.get();
+        return nombre.getText();
     }
 
     public void setNombre(String nombre) {
-        this.nombre.set(nombre);
+        this.nombre.setText(nombre);
     }
 
     public ArrayList<Ayudante> getAyudantes() {

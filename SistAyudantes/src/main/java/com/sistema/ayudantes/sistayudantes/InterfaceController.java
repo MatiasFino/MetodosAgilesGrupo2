@@ -33,12 +33,12 @@ public class InterfaceController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Materia> s = FXCollections.observableList(createStringList());
         subjectsTable.setItems(s);
-        TableColumn<Materia,String> subjectsColumn = new TableColumn<>("Materias");
+        TableColumn<Materia,Label> subjectsColumn = new TableColumn<>("Materias");
         subjectsTable.setMinSize(405,215);
         subjectsTable.setMaxSize(405,215);
         subjectsColumn.setMinWidth(assistantsTable.getMinWidth());
         subjectsColumn.setMaxWidth(assistantsTable.getMaxWidth());
-        subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia,String>("nombre"));
+        subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia,Label>("nombre"));
         subjectsColumn.setMinWidth(subjectsTable.getMaxWidth());
         subjectsTable.getColumns().addAll(subjectsColumn);
     }
@@ -105,12 +105,12 @@ public class InterfaceController implements Initializable {
                     ObservableList<Ayudante> a = FXCollections.observableArrayList(subjectsList.get(i).getAyudantes());
                     assistantsTable.getColumns().clear();
                     assistantsTable.setItems(a);
-                    TableColumn<Ayudante,String> assistantsColumn = new TableColumn<>("Ayudantes");
+                    TableColumn<Ayudante,Label> assistantsColumn = new TableColumn<>("Ayudantes");
                     assistantsTable.setMinSize(405,215);
                     assistantsTable.setMaxSize(405,215);
                     assistantsColumn.setMinWidth(assistantsTable.getMinWidth());
                     assistantsColumn.setMaxWidth(assistantsTable.getMaxWidth());
-                    assistantsColumn.setCellValueFactory(new PropertyValueFactory<Ayudante,String>("nombre"));
+                    assistantsColumn.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("nombre"));
                     assistantsColumn.setMinWidth(assistantsTable.getMaxWidth());
                     assistantsTable.getColumns().addAll(assistantsColumn);
                     nameSubject.setText(subjectsList.get(i).getNombre());
