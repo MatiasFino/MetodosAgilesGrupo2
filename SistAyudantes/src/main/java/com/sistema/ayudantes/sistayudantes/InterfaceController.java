@@ -55,16 +55,17 @@ public class InterfaceController implements Initializable {
         ObservableList<Materia> s = FXCollections.observableList(createStringList());
         subjectsTable.setItems(s);
         TableColumn<Materia, String> subjectsColumn = new TableColumn<Materia, String>("Materias");
-        subjectsTable.setMinSize(405, 215);
-        subjectsTable.setMaxSize(405, 215);
+        subjectsTable.setMinSize(842, 345);
+        subjectsTable.setMaxSize(842, 1200);
+
         subjectsColumn.setMinWidth(assistantsTable.getMinWidth());
         subjectsColumn.setMaxWidth(assistantsTable.getMaxWidth());
-
         subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia, String>("nombre")); //nombre es la varible de la clase materia
         //configuramos las columnas para que sepan de donde sacar la informacion
         subjectsColumn.setMinWidth(subjectsTable.getMaxWidth());
         subjectsTable.getColumns().addAll(subjectsColumn);
         colorear(subjectsColumn);
+
     }
 
 
@@ -95,7 +96,6 @@ public class InterfaceController implements Initializable {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-
                     if (item == null || empty) {
                         setText(null);
                         setStyle("");
@@ -105,7 +105,7 @@ public class InterfaceController implements Initializable {
                             setStyle("-fx-background-color: yellow");
                         }
                         if (get_cantidad(item)==0){
-                            setStyle("-fx-background-color: white");
+                            setStyle("-fx-background-color: RED");
                         }
                         if (get_cantidad(item)==get_cantidad_necesario(item)){
                             setTextFill(Color.BLACK);
@@ -113,6 +113,7 @@ public class InterfaceController implements Initializable {
                         }
                     }
                     setText(item);
+
                 }
             };
         });
@@ -208,8 +209,8 @@ public class InterfaceController implements Initializable {
                     assistantsTable.getColumns().clear();
                     assistantsTable.setItems(a);
                     TableColumn<Ayudante,Label> assistantsColumn = new TableColumn<>("Ayudantes");
-                    assistantsTable.setMinSize(405,215);
-                    assistantsTable.setMaxSize(405,215);
+                    assistantsTable.setMinSize(400, 345);
+                    assistantsTable.setMaxSize(842, 800);
                     assistantsColumn.setMinWidth(assistantsTable.getMinWidth());
                     assistantsColumn.setMaxWidth(assistantsTable.getMaxWidth());
                     assistantsColumn.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("nombre"));
