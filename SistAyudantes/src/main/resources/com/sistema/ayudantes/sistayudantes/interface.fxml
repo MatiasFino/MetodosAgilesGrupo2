@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
     <children>
-        <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@estilo.css" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="50.0" fitWidth="183.0" layoutX="392.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -45,11 +45,11 @@
             </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="subjectsPanel" prefHeight="400.0" prefWidth="600.0" visible="false">
+        <AnchorPane fx:id="subjectsPanel" prefHeight="400.0" prefWidth="600.0">
             <children>
             <Button fx:id="back1" layoutX="145.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver" />
             <TableView fx:id="subjectsTable" layoutX="86.0" layoutY="55.0" prefHeight="233.0" prefWidth="429.0" />
-            <ImageView fitHeight="39.0" fitWidth="27.0" layoutX="145.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="27.0" layoutX="155.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/volver.png" />
                </image>

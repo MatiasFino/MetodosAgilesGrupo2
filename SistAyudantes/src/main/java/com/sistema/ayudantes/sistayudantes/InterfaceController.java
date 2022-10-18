@@ -2,6 +2,7 @@ package com.sistema.ayudantes.sistayudantes;
 
 import javafx.application.Platform;
 import javafx.beans.value.ObservableSetValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,12 +13,27 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.paint.*;
+import javafx.util.Callback;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class InterfaceController implements Initializable {
     @FXML private AnchorPane subjectsPanel;
@@ -26,22 +42,87 @@ public class InterfaceController implements Initializable {
     @FXML private Label nameSubject;
     @FXML private Label cantidadAyudantia;
     @FXML private TableView<Materia> subjectsTable;
+
     @FXML private TableView<Ayudante> assistantsTable;
     @FXML private Text txtNotification = new Text("Notifications");
     private ArrayList<Materia> subjectsList;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //se transforma una lista de un objeto en una observableArrayList
         ObservableList<Materia> s = FXCollections.observableList(createStringList());
         subjectsTable.setItems(s);
-        TableColumn<Materia,Label> subjectsColumn = new TableColumn<>("Materias");
-        subjectsTable.setMinSize(405,215);
-        subjectsTable.setMaxSize(405,215);
+        TableColumn<Materia, String> subjectsColumn = new TableColumn<Materia, String>("Materias");
+        subjectsTable.setMinSize(405, 215);
+        subjectsTable.setMaxSize(405, 215);
         subjectsColumn.setMinWidth(assistantsTable.getMinWidth());
         subjectsColumn.setMaxWidth(assistantsTable.getMaxWidth());
-        subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia,Label>("nombre"));
+
+        subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia, String>("nombre")); //nombre es la varible de la clase materia
+        //configuramos las columnas para que sepan de donde sacar la informacion
         subjectsColumn.setMinWidth(subjectsTable.getMaxWidth());
         subjectsTable.getColumns().addAll(subjectsColumn);
+        colorear(subjectsColumn);
     }
+
+
+    public int get_cantidad(String nombre) {
+        for (int i = 0; i < subjectsList.size(); i++) {
+            if (subjectsList.get(i).getNombre().equals(nombre)) {
+                return subjectsList.get(i).cantAyudantesActuales();
+            }
+        }
+        return 0;
+    }
+
+
+    public int get_cantidad_necesario(String nombre){
+        for (int i = 0; i < subjectsList.size(); i++) {
+            if (subjectsList.get(i).getNombre().equals(nombre)) {
+                return subjectsList.get(i).getAyudantesNecesarios();
+            }
+        }
+        return 0;
+    }
+
+
+
+    public void colorear(TableColumn<Materia,String> columna) {
+        columna.setCellFactory(column -> {
+            return new TableCell<Materia,String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        if (get_cantidad(item) < get_cantidad_necesario(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: yellow");
+                        }
+                        if (get_cantidad(item)==0){
+                            setStyle("-fx-background-color: white");
+                        }
+                        if (get_cantidad(item)==get_cantidad_necesario(item)){
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: green");
+                        }
+                    }
+                    setText(item);
+                }
+            };
+        });
+    }
+
+
+
+
+
+
 
     public ArrayList<Materia> createStringList(){
         subjectsList = new ArrayList<>();
@@ -60,9 +141,30 @@ public class InterfaceController implements Initializable {
         m3.addAyudante(new Ayudante("Messi"));
         m3.addAyudante(new Ayudante("Paredes"));
         m3.addAyudante(new Ayudante("Romero"));
+        Materia m8 = new Materia("Analisis 2");
+        m8.setAyudantesNecesarios(5);
+        Materia m9 = new Materia("Analisis 3");
+        m9.setAyudantesNecesarios(5);
+        Materia m10 = new Materia("Analisis 4");
+        m10.setAyudantesNecesarios(5);
+        Materia m11 = new Materia("Analisis 5");
+        m11.setAyudantesNecesarios(5);
+        Materia m12 = new Materia("Analisis 6");
+        m12.setAyudantesNecesarios(3);
+        Materia m13 = new Materia("Analisis 7");
+        m13.setAyudantesNecesarios(3);
+        Materia m14 = new Materia("Analisis 8");
+        m14.setAyudantesNecesarios(5);
         subjectsList.add(m1);
         subjectsList.add(m2);
         subjectsList.add(m3);
+        subjectsList.add(m8);
+        subjectsList.add(m9);
+        subjectsList.add(m10);
+        subjectsList.add(m11);
+        subjectsList.add(m12);
+        subjectsList.add(m13);
+        subjectsList.add(m14);
         return subjectsList;
     }
 

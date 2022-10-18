@@ -10,6 +10,7 @@ public class Materia {
     private ArrayList<Ayudante> ayudantes;
     private int ayudantesNecesarios;
 
+
     private int cantidadAyudantes;
 
     public Materia(String nombre){
@@ -56,4 +57,5 @@ public class Materia {
         }
         return "Completo";
     }
+
 }
