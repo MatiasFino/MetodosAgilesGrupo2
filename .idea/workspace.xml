@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed6156d3-19be-47c2-ad74-abd5919e1402" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/estilo.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +69,7 @@
       <workItem from="1665843060283" duration="4204000" />
       <workItem from="1666099473269" duration="9056000" />
       <workItem from="1666125842885" duration="10215000" />
+      <workItem from="1666136908351" duration="118000" />
     </task>
     <servers />
   </component>

@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
     <children>
-        <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="575.0" prefWidth="879.0" stylesheets="@estilo.css" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="575.0" prefWidth="879.0" stylesheets="@estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="83.0" fitWidth="224.0" layoutX="624.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -51,7 +51,7 @@
             </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="subjectsPanel" prefHeight="575.0" prefWidth="879.0">
+        <AnchorPane fx:id="subjectsPanel" prefHeight="575.0" prefWidth="879.0" visible="false">
             <children>
             <Button fx:id="back1" layoutX="302.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver">
                <font>
