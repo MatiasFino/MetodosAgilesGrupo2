@@ -157,39 +157,6 @@ public class InterfaceController implements Initializable {
         });
     }
 
-
-
-
-    /*
-
-    public void seleccionar(TableColumn<Materia,String> col){
-
-        col.setCellFactory(new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
-            @Override
-            public TableCell<Materia, String> call(TableColumn<Materia, String> materiaStringTableColumn) {
-                return new TableCell<Materia,String>(){
-                    @Override
-                    protected void updateItem(String name, boolean empty){
-                        super.updateItem(name,empty);
-                        if(
-
-
-
-                    }
-
-
-
-
-
-
-                }
-            }
-        });
-
-    }
-    */
-
-
     public ArrayList<Materia> createStringList(){
         subjectsList = new ArrayList<>();
         Materia m1 = new Materia("Prog 1");
