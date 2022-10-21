@@ -46,26 +46,40 @@ public class InterfaceController implements Initializable {
     @FXML private TableView<Ayudante> assistantsTable;
     @FXML private Text txtNotification = new Text("Notifications");
     private ArrayList<Materia> subjectsList;
+    private TableColumn<Materia,String> subjectsColumn = new TableColumn<Materia,String>("Materias");
+
+    private  ObservableList<Materia> s = FXCollections.observableList(createStringList());
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //se transforma una lista de un objeto en una observableArrayList
-        ObservableList<Materia> s = FXCollections.observableList(createStringList());
         subjectsTable.setItems(s);
-        TableColumn<Materia, String> subjectsColumn = new TableColumn<Materia, String>("Materias");
+        //TableColumn<Materia, String> subjectsColumn = new TableColumn<Materia, String>("Materias");
+        TableColumn<Materia,String> estadoMateria= new TableColumn<Materia,String>("Estado");
         subjectsTable.setMinSize(842, 345);
         subjectsTable.setMaxSize(842, 1200);
 
         subjectsColumn.setMinWidth(assistantsTable.getMinWidth());
         subjectsColumn.setMaxWidth(assistantsTable.getMaxWidth());
         subjectsColumn.setCellValueFactory(new PropertyValueFactory<Materia, String>("nombre")); //nombre es la varible de la clase materia
+        estadoMateria.setCellValueFactory(new PropertyValueFactory<Materia,String>("Estado"));
         //configuramos las columnas para que sepan de donde sacar la informacion
-        subjectsColumn.setMinWidth(subjectsTable.getMaxWidth());
-        subjectsTable.getColumns().addAll(subjectsColumn);
+        subjectsColumn.setMinWidth(subjectsTable.getMaxWidth()/2);
+        estadoMateria.setMaxWidth(subjectsTable.getMaxWidth());
+        estadoMateria.setMinWidth(subjectsTable.getMinWidth()/2);
+        subjectsTable.getColumns().addAll(subjectsColumn,estadoMateria);
         colorear(subjectsColumn);
+        contarEstado();
+        colorearEstado(estadoMateria);
+    }
 
+
+    public void contarEstado(){
+        for(int i = 0; i < subjectsList.size();i++){
+            subjectsList.get(i).estadoMateria();
+        }
     }
 
 
@@ -88,8 +102,6 @@ public class InterfaceController implements Initializable {
         return 0;
     }
 
-
-
     public void colorear(TableColumn<Materia,String> columna) {
         columna.setCellFactory(column -> {
             return new TableCell<Materia,String>() {
@@ -101,14 +113,40 @@ public class InterfaceController implements Initializable {
                         setStyle("");
                     } else {
                         if (get_cantidad(item) < get_cantidad_necesario(item)) {
-                            setTextFill(Color.BLACK);
                             setStyle("-fx-background-color: yellow");
                         }
                         if (get_cantidad(item)==0){
                             setStyle("-fx-background-color: RED");
                         }
                         if (get_cantidad(item)==get_cantidad_necesario(item)){
-                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: green");
+                        }
+                    }
+                    setText(item);
+
+                }
+            };
+        });
+    }
+
+
+    public void colorearEstado(TableColumn<Materia,String> columna) {
+        columna.setCellFactory(column -> {
+            return new TableCell<Materia,String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        if (item.equals("Incompleto")) {
+                            setStyle("-fx-background-color: yellow");
+                        }
+                        if (item.equals("Sin candidatos")){
+                            setStyle("-fx-background-color: RED");
+                        }
+                        if (item.equals("Completo")){
                             setStyle("-fx-background-color: green");
                         }
                     }
@@ -122,26 +160,52 @@ public class InterfaceController implements Initializable {
 
 
 
+    /*
 
+    public void seleccionar(TableColumn<Materia,String> col){
+
+        col.setCellFactory(new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
+            @Override
+            public TableCell<Materia, String> call(TableColumn<Materia, String> materiaStringTableColumn) {
+                return new TableCell<Materia,String>(){
+                    @Override
+                    protected void updateItem(String name, boolean empty){
+                        super.updateItem(name,empty);
+                        if(
+
+
+
+                    }
+
+
+
+
+
+
+                }
+            }
+        });
+
+    }
+    */
 
 
     public ArrayList<Materia> createStringList(){
         subjectsList = new ArrayList<>();
         Materia m1 = new Materia("Prog 1");
         m1.setAyudantesNecesarios(3); // en esta linea indico la cantidad de ayudantes que necesita la materia
-        m1.addAyudante(new Ayudante("Langoni"));
-        m1.addAyudante(new Ayudante("Benedetto"));
-        m1.addAyudante(new Ayudante("Varela"));
+        m1.addAyudante(new Ayudante("Luca","Alumno","langoni@gmail.com","Langoni"));
+        m1.addAyudante(new Ayudante("Dario","Alumno","dario@gmail.com","Benedetto"));
+        m1.addAyudante(new Ayudante("Alan","Alumno","discoteca@gmail.com","Varela"));
         Materia m2 = new Materia("Analisis 1");
         m2.setAyudantesNecesarios(4);
-        m2.addAyudante(new Ayudante("Borja"));
-        m2.addAyudante(new Ayudante("Armani"));
-        m2.addAyudante(new Ayudante("Barco"));
+        m2.addAyudante(new Ayudante("Miguel","Alumno","borja@gmail.com","Borja"));
+        m2.addAyudante(new Ayudante("Franco","Alumno","franco@gmail.com","Armani"));
+        m2.addAyudante(new Ayudante("Ezequiel","Alumno","Eze@gmail.com","Barco"));
         Materia m3 = new Materia("Objetos");
         m3.setAyudantesNecesarios(5);
-        m3.addAyudante(new Ayudante("Messi"));
-        m3.addAyudante(new Ayudante("Paredes"));
-        m3.addAyudante(new Ayudante("Romero"));
+        m3.addAyudante(new Ayudante("Lionel","Alumno","Messi@gmail.com","Messi"));
+        m3.addAyudante(new Ayudante("Leandro","Alumno","Paredes@gmail.com","Paredes"));
         Materia m8 = new Materia("Analisis 2");
         m8.setAyudantesNecesarios(5);
         Materia m9 = new Materia("Analisis 3");
@@ -180,6 +244,7 @@ public class InterfaceController implements Initializable {
         assistantsPanel.setVisible(false);
     }
 
+
     public void onBackPrincipalPanelButtonClicked(MouseEvent event){ //VUELVE AL MENU
         subjectsPanel.setVisible(false);
         principalPanel.setVisible(true);
@@ -208,19 +273,25 @@ public class InterfaceController implements Initializable {
                     ObservableList<Ayudante> a = FXCollections.observableArrayList(subjectsList.get(i).getAyudantes());
                     assistantsTable.getColumns().clear();
                     assistantsTable.setItems(a);
-                    TableColumn<Ayudante,Label> assistantsColumn = new TableColumn<>("Ayudantes");
-                    assistantsTable.setMinSize(400, 345);
+                    TableColumn<Ayudante,Label> assistantsColumn = new TableColumn<>("Nombre");
+                    TableColumn<Ayudante,Label> asistApellido = new TableColumn<>("Apellido");
+                    TableColumn<Ayudante,Label> emailAyudante = new TableColumn<>("Email");
+                    TableColumn<Ayudante,Label> tipoAyudante = new TableColumn<>("tipo");
+                    assistantsTable.setMinSize(800, 345);
                     assistantsTable.setMaxSize(842, 800);
-                    assistantsColumn.setMinWidth(assistantsTable.getMinWidth());
-                    assistantsColumn.setMaxWidth(assistantsTable.getMaxWidth());
                     assistantsColumn.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("nombre"));
-                    assistantsColumn.setMinWidth(assistantsTable.getMaxWidth());
-                    assistantsTable.getColumns().addAll(assistantsColumn);
+                    asistApellido.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("apellido"));
+                    emailAyudante.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("email"));
+                    tipoAyudante.setCellValueFactory(new PropertyValueFactory<Ayudante,Label>("tipo"));
+                    assistantsColumn.setMinWidth(assistantsTable.getMinWidth()/4);
+                    asistApellido.setMinWidth(assistantsTable.getMinWidth()/4);
+                    emailAyudante.setMinWidth(assistantsTable.getMinWidth()/4);
+                    tipoAyudante.setMinWidth(assistantsTable.getMinWidth()/4);
+                    assistantsTable.getColumns().addAll(assistantsColumn,asistApellido,tipoAyudante,emailAyudante);
                     nameSubject.setText(subjectsList.get(i).getNombre());
                     cantidadAyudantia.setText(subjectsList.get(i).getNombre() + " posee "+ subjectsList.get(i).cantAyudantesActuales()+" de "+subjectsList.get(i).getAyudantesNecesarios()+" ayudantes necesarios");
                 }
             }
         }
     }
-
 }

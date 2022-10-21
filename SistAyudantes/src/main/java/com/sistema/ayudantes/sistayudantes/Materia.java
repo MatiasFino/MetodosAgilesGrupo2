@@ -9,6 +9,7 @@ public class Materia {
     private Label nombre;
     private ArrayList<Ayudante> ayudantes;
     private int ayudantesNecesarios;
+    private Label Estado;
 
 
     private int cantidadAyudantes;
@@ -17,6 +18,7 @@ public class Materia {
         this.nombre = new Label(nombre);
         this.ayudantes = new ArrayList<>();
         this.cantidadAyudantes=0;
+        this.Estado=new Label("sin estado");
     }
 
     public String getNombre() {
@@ -51,11 +53,27 @@ public class Materia {
         this.ayudantesNecesarios = ayudantesNecesarios;
     }
 
-    public String estadoMateria(int cantidad){
-        if(cantidad < cantidadAyudantes){
-            return "Incompleto";
+
+    public void estadoMateria(){
+        if(cantAyudantesActuales() < ayudantesNecesarios) {
+            setEstado("Incompleto");
         }
-        return "Completo";
+        if (cantAyudantesActuales() == ayudantesNecesarios && (cantAyudantesActuales()!=0)){
+            setEstado("Completo");
+        }
+        if (cantAyudantesActuales() == 0)
+            setEstado("Sin candidatos");
     }
+
+
+
+    public void setEstado(String estado){
+        this.Estado.setText(estado);
+    }
+
+    public String getEstado(){
+        return Estado.getText();
+    }
+
 
 }

@@ -53,27 +53,35 @@
         </AnchorPane>
         <AnchorPane fx:id="subjectsPanel" prefHeight="575.0" prefWidth="879.0" visible="false">
             <children>
-            <Button fx:id="back1" layoutX="302.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver">
+            <Button fx:id="back1" layoutX="310.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver">
                <font>
                   <Font name="Tw Cen MT" size="16.0" />
                </font></Button>
-            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="310.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="323.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/volver.png" />
                </image>
             </ImageView>
-            <Button fx:id="viewAssistants" layoutX="487.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#onViewAssistantsChoiceClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text="Ver ayudantes">
+            <Button fx:id="viewAssistants" layoutX="487.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onViewAssistantsChoiceClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text="Ver ayudantes">
                <font>
                   <Font name="Tw Cen MT" size="16.0" />
                </font></Button>
-            <Text fx:id="txtNotification" layoutX="170.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="572.13671875">
+            <Text fx:id="txtNotification" layoutX="170.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="572.13671875">
                <font>
                   <Font name="Tw Cen MT" size="15.0" />
                </font></Text>
             <HBox fx:id="Barra" layoutY="-7.0" prefHeight="50.0" prefWidth="879.0" stylesheets="@estilo.css">
                <children>
+                  <ImageView fitHeight="38.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@images/usuario.png" />
+                     </image>
+                  </ImageView>
                   <Separator prefHeight="3.0" prefWidth="699.0" />
-                  <ImageView fitHeight="43.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/LogoExactas.png" />
                      </image>
@@ -112,10 +120,18 @@
                   <Font name="Tw Cen MT" size="27.0" />
                </font>
             </Label>
-            <HBox fx:id="Barra2" layoutX="1.0" prefHeight="50.0" prefWidth="879.0" stylesheets="@estilo.css">
+            <HBox fx:id="Barra2" prefHeight="48.0" prefWidth="880.0" stylesheets="@estilo.css">
                <children>
+                  <ImageView fitHeight="38.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="10.0" top="7.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@images/usuario.png" />
+                     </image>
+                  </ImageView>
                   <Separator prefHeight="0.0" prefWidth="704.0" />
-                  <ImageView fitHeight="48.0" fitWidth="166.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/LogoExactas.png" />
                      </image>
