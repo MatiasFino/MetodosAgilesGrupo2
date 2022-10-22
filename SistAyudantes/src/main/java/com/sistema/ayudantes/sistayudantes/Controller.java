@@ -19,39 +19,39 @@ public class Controller {
     
     private void extraerLineasCsv(String csv, ArrayList<String[]> filasCsv){ //csv cuantificador del grupo1   csv= Documentos/archivo.csv
 	        
-	        String SEPARADOR = ",";
-	        BufferedReader bufferLectura = null;
-	        try {
-		         // Abrir el .csv en buffer de lectura
-		        
-		         bufferLectura = new BufferedReader(new FileReader(csv));
-		         
-		         // Leer una linea del archivo
-		         String linea = bufferLectura.readLine();
-		         while (linea != null) {
-		            // Sepapar la linea leída con el separador definido previamente
-		            //String[] campos = new String[2];
-		          
-		            String[] a = linea.split(SEPARADOR);
-		            filasCsv.add(a);
-		            // Volver a leer otra línea del fichero
-		            linea = bufferLectura.readLine();
-		            }
-	        } 
-	        catch (IOException e) {
-	        	e.printStackTrace();
-	        }
-	        finally {
-		         // Cierro el buffer de lectura
-		         if (bufferLectura != null) {
-		          try {
-		           bufferLectura.close();
-		          } 
-		          catch (IOException e) {
-		           e.printStackTrace();
-		          }
-		         }
-	        }
+		String SEPARADOR = ",";
+		BufferedReader bufferLectura = null;
+		try {
+			// Abrir el .csv en buffer de lectura
+		
+			bufferLectura = new BufferedReader(new FileReader(csv));
+			
+			// Leer una linea del archivo
+			String linea = bufferLectura.readLine();
+			while (linea != null) {
+			// Sepapar la linea leída con el separador definido previamente
+			//String[] campos = new String[2];
+			
+			String[] a = linea.split(SEPARADOR);
+			filasCsv.add(a);
+			// Volver a leer otra línea del fichero
+			linea = bufferLectura.readLine();
+			}
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// Cierro el buffer de lectura
+			if (bufferLectura != null) {
+			try {
+			bufferLectura.close();
+			} 
+			catch (IOException e) {
+			e.printStackTrace();
+			}
+			}
+		}
     }
     
     
@@ -60,7 +60,7 @@ public class Controller {
     	ArrayList <String[]> dmaterias= new ArrayList<String[]>(); //guardamos en un ArrayList los datos por materia
     	this.extraerLineasCsv(csv, dmaterias);
     	for (String[] dmateria: dmaterias) { 
-    		Materia m = new Materia(Integer.parseInt(dmateria[0]),Integer.parseInt(dmateria[1]),Integer.parseInt(dmateria[2])); //ID Materia, cantidadAyudantes, cantidadGraduados (1,5,2)
+    		Materia m = new Materia(Integer.parseInt(dmateria[0]),dmateria[1],Integer.parseInt(dmateria[2]),Integer.parseInt(dmateria[3])); //ID Materia, nombre materia, cantidadAyudantes, cantidadGraduados (1,materia1,5,2)
             this.materias.add(m);
     	}
         System.out.println("Materias: "+ this.materias.size());
@@ -81,7 +81,6 @@ public class Controller {
     			else 
     				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), this.postulantes.get(Integer.parseInt(dpostulante[1])));
     		}
- 
     	}
     }
     
