@@ -5,8 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+
+import javafx.util.Pair;
 
 public class Controller {
     private ArrayList<Materia> materias; 
@@ -108,10 +112,6 @@ public class Controller {
         
     }
 
-    public int cantAyudantesMateria(){
-        return 0;
-    }
-
     public void imprimirPostulantesxMateria() {
     	for (Materia m: this.materias) {
     		m.imprimirPostulantes();
@@ -124,6 +124,16 @@ public class Controller {
     		System.out.println(p.getId());
     	}
     }
+    
+    //devuelve un mapa con los pares <idMateria, cantAyudantes>
+    public Map<Integer, Integer> cantAyudantesMateria(){
+    	Map<Integer, Integer> mapa= new HashMap<>();
+    	for (Materia m: this.materias) {
+    		mapa.put(m.getId(), m.getCantAyudantes());
+    	}
+		return mapa;
+    }
+    
 }
 
 

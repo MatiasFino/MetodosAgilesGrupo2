@@ -32,6 +32,10 @@ public class Materia {
     	return id;
     }
     
+    public int getCantAyudantes() {
+    	return this.cantAyudantes;
+    }
+    
     public void imprimirPostulantes() {
     	System.out.println("MATERIA : " + this.getId());
     	for (Postulante p: this.postulantes) {
