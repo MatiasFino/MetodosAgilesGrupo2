@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Controller {
     private ArrayList<Materia> materias; 
-    //private Hashtable<Materia, ArrayList<Integer>> postulantes; 
+    private Hashtable<Integer, Postulante> postulantes; //idPostulante, Postulante
     
     public Controller(){
         this.materias=new ArrayList<Materia>();
-        //this.postulantes=new Hashtable<Materia, ArrayList<Integer>>();
+        this.postulantes=new Hashtable<Integer, Postulante>();
     }
     
     private void extraerLineasCsv(String csv, ArrayList<String[]> filasCsv){ //csv cuantificador del grupo1   csv= Documentos/archivo.csv
@@ -22,39 +22,37 @@ public class Controller {
 	        String SEPARADOR = ",";
 	        BufferedReader bufferLectura = null;
 	        try {
-	         // Abrir el .csv en buffer de lectura
-	        
-	         bufferLectura = new BufferedReader(new FileReader(csv));
-	         
-	         // Leer una linea del archivo
-	         String linea = bufferLectura.readLine();
-	         while (linea != null) {
-	            // Sepapar la linea leída con el separador definido previamente
-	            //String[] campos = new String[2];
-	          
-	            String[] a = linea.split(SEPARADOR);
-	            filasCsv.add(a);
-	            // Volver a leer otra línea del fichero
-	            linea = bufferLectura.readLine();
-	            }
+		         // Abrir el .csv en buffer de lectura
+		        
+		         bufferLectura = new BufferedReader(new FileReader(csv));
+		         
+		         // Leer una linea del archivo
+		         String linea = bufferLectura.readLine();
+		         while (linea != null) {
+		            // Sepapar la linea leída con el separador definido previamente
+		            //String[] campos = new String[2];
+		          
+		            String[] a = linea.split(SEPARADOR);
+		            filasCsv.add(a);
+		            // Volver a leer otra línea del fichero
+		            linea = bufferLectura.readLine();
+		            }
 	        } 
 	        catch (IOException e) {
-	         e.printStackTrace();
+	        	e.printStackTrace();
 	        }
 	        finally {
-	         // Cierro el buffer de lectura
-	         if (bufferLectura != null) {
-	          try {
-	           bufferLectura.close();
-	          } 
-	          catch (IOException e) {
-	           e.printStackTrace();
-	          }
-	         }
+		         // Cierro el buffer de lectura
+		         if (bufferLectura != null) {
+		          try {
+		           bufferLectura.close();
+		          } 
+		          catch (IOException e) {
+		           e.printStackTrace();
+		          }
+		         }
 	        }
-	
-	        //System.out.println("Materias: "+ this.materias.size());
-	    }
+    }
     
     
    //Se recibe un csv el cual contiene para cada materia, la cantidad de ayudantes que le corresponden y la cantidad de graduados que la/el docente a cargo decidio 
@@ -75,11 +73,16 @@ public class Controller {
     	this.extraerLineasCsv(csv, dPostulantes); //linea: ID materia, ID postulante, tipo de postulante, nombre del postulante, email, cantidad horas que trabaja, cantidad de materias asignadas
     	for (String[] dpostulante: dPostulantes) {
     		if (existeMateria(Integer.parseInt(dpostulante[0]))) {
-    			Postulante p = new Postulante(Integer.parseInt(dpostulante[1]), dpostulante[2].charAt(0), dpostulante[3], dpostulante[4], Integer.parseInt(dpostulante[5]), Integer.parseInt(dpostulante[6]));
-    			this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
+    			if (!this.postulantes.containsKey(Integer.parseInt(dpostulante[1]))) {
+    				Postulante p = new Postulante(Integer.parseInt(dpostulante[1]), dpostulante[2].charAt(0), dpostulante[3], dpostulante[4], Integer.parseInt(dpostulante[5]), Integer.parseInt(dpostulante[6]));
+    				this.postulantes.put(Integer.parseInt(dpostulante[1]), p);
+    				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
+    			}
+    			else 
+    				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), this.postulantes.get(Integer.parseInt(dpostulante[1])));
     		}
-    	}
  
+    	}
     }
     
     private boolean existeMateria(int id) {
@@ -113,6 +116,13 @@ public class Controller {
     public void imprimirPostulantesxMateria() {
     	for (Materia m: this.materias) {
     		m.imprimirPostulantes();
+    	}
+    }
+    
+    public void imprimirTotalPostulates() {
+    	System.out.println("Cantidad de postulantes totales : " + this.postulantes.size());
+    	for (Postulante p: this.postulantes.values()) {
+    		System.out.println(p.getId());
     	}
     }
 }
