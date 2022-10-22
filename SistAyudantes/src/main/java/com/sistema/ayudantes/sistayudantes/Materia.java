@@ -20,5 +20,21 @@ public class Materia {
         this.postulantes=new ArrayList<Postulante>();
     }
 
+    public void cargarPostulante(Postulante ayudante_nuevo) {
+    	if (!postulantes.contains(ayudante_nuevo)) {
+    		postulantes.add(ayudante_nuevo);
+    	}
+    }
+    
+    public int getId() {
+    	return id;
+    }
+    
+    public void imprimirPostulantes() {
+    	System.out.println("MATERIA : " + this.getId());
+    	for (Postulante p: this.postulantes) {
+    		System.out.println(p.getId());
+    	}
+    }
     
 }
