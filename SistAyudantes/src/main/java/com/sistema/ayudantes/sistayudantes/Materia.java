@@ -1,6 +1,8 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Materia {
     private int id;
@@ -41,6 +43,9 @@ public class Materia {
     	for (Postulante p: this.postulantes) {
     		System.out.println(p.getId());
     	}
+    }
+    public List<Postulante> getAyudantes() {
+        return Collections.unmodifiableList(this.ayudantes);
     }
     
 }

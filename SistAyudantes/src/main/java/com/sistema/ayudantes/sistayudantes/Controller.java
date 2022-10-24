@@ -108,8 +108,14 @@ public class Controller {
         
     }
 
-    public void ayudantesMateria(){
-        
+	//Obtener ayuudantes de una materia por id. Utilizado una vez que se realizaron las asignaciones
+    public List<Postulante> ayudantesMateria(int id) {
+		for(Materia m : this.materias) {
+			if(m.getId() == id) {
+				return m.getAyudantes();
+			}
+		}
+      return new ArrayList<>();
     }
 
     public void imprimirPostulantesxMateria() {
