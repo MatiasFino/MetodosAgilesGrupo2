@@ -67,7 +67,7 @@ public class Controller {
     		Materia m = new Materia(Integer.parseInt(dmateria[0]),dmateria[1],Integer.parseInt(dmateria[2]),Integer.parseInt(dmateria[3])); //ID Materia, nombre materia, cantidadAyudantes, cantidadGraduados (1,materia1,5,2)
             this.materias.add(m);
     	}
-        System.out.println("Materias: "+ this.materias.size());
+        System.out.println("Cantidad de materias cargadas: "+ this.materias.size());
 
     }
 
@@ -126,6 +126,7 @@ public class Controller {
     
     public void imprimirTotalPostulates() {
     	System.out.println("Cantidad de postulantes totales : " + this.postulantes.size());
+    	System.out.println("Id de postulantes cargados : ");
     	for (Postulante p: this.postulantes.values()) {
     		System.out.println(p.getId());
     	}

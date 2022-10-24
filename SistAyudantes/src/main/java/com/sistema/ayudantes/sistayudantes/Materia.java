@@ -39,7 +39,7 @@ public class Materia {
     }
     
     public void imprimirPostulantes() {
-    	System.out.println("MATERIA : " + this.getId());
+    	System.out.println("Postulantes a la MATERIA: " + this.getId());
     	for (Postulante p: this.postulantes) {
     		System.out.println(p.getId());
     	}
