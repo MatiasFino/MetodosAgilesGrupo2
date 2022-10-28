@@ -1,0 +1,15 @@
+package Email;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class EmailServiceTest {
+
+    @Test
+    void notificarAyudante() {
+        EmailService test = new EmailService();
+        int resultado = test.notificarAyudante();
+    assertEquals(200,resultado);
+    }
+}
