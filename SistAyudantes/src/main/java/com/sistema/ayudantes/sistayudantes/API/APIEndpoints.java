@@ -1,21 +1,16 @@
 package com.sistema.ayudantes.sistayudantes.API;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCursor;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
 import org.bson.Document;
-import org.bson.json.JsonWriter;
 import spark.Route;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.get;
-import static spark.Spark.post;
 
 public class APIEndpoints {
     public static void configureRoutes() {

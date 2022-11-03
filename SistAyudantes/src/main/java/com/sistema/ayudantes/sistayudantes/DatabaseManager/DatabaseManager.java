@@ -2,9 +2,7 @@ package com.sistema.ayudantes.sistayudantes.DatabaseManager;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
 
 public class DatabaseManager {
     private static DatabaseManager databaseManager;
