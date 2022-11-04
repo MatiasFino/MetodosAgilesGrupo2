@@ -1,6 +1,7 @@
-package com.sistema.ayudantes.sistayudantes;
+package com.sistema.ayudantes.sistayudantes.Frontend;
 
 import com.sistema.ayudantes.sistayudantes.API.APIRequest;
+import com.sistema.ayudantes.sistayudantes.API.DataInterfaces.IAyudante;
 import com.sistema.ayudantes.sistayudantes.API.DataInterfaces.IMateria;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.json.*;
+
 public class InterfaceController implements Initializable {
     @FXML private AnchorPane subjectsPanel;
     @FXML private AnchorPane principalPanel;
@@ -157,6 +158,15 @@ public class InterfaceController implements Initializable {
         return subjectsList;
     }
 
+    public ArrayList<Ayudante> ayudantesAsignados(String idMateria) throws IOException {
+        ArrayList<Ayudante> ayudantesAsignados = new ArrayList<>();
+        List<IAyudante> ayudantes = APIRequest.getAyudantes(idMateria);
+        for(IAyudante ayudante : ayudantes) {
+            ayudantesAsignados.add(new Ayudante(ayudante.nombre, ayudante.tipo, ayudante.email, ayudante.apellido));
+        }
+        return ayudantesAsignados;
+    }
+
     public void onExitButtonClicked(MouseEvent event){ //SALE DE LA INTERFAZ
         Platform.exit();
         System.exit(0);
@@ -182,7 +192,7 @@ public class InterfaceController implements Initializable {
     }
 
 
-    public void onViewAssistantsChoiceClicked(MouseEvent event){
+    public void onViewAssistantsChoiceClicked(MouseEvent event) throws IOException {
         if(subjectsTable.getSelectionModel().isEmpty()){
             txtNotification.setVisible(true);
             txtNotification.setText("Por favor, seleccione una materia de la lista para ver sus ayudantes designados");
@@ -194,6 +204,9 @@ public class InterfaceController implements Initializable {
             assistantsPanel.setVisible(true);
             for(int i=0;i<subjectsList.size();i++) {
                 if (subjectsTable.getSelectionModel().getSelectedItem().equals(subjectsList.get(i))) {
+                    ObservableList<Ayudante> a = FXCollections.observableArrayList(ayudantesAsignados(subjectsList.get(i).id));
+                    assistantsTable.getColumns().clear();
+                    assistantsTable.setItems(a);
                     TableColumn<Ayudante,Label> assistantsColumn = new TableColumn<>("Nombre");
                     TableColumn<Ayudante,Label> asistApellido = new TableColumn<>("Apellido");
                     TableColumn<Ayudante,Label> emailAyudante = new TableColumn<>("Email");

@@ -1,4 +1,4 @@
-package com.sistema.ayudantes.sistayudantes;
+package com.sistema.ayudantes.sistayudantes.Frontend;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.beans.property.SimpleStringProperty;

@@ -14,4 +14,6 @@ module com.sistema.ayudantes.sistayudantes {
     opens com.sistema.ayudantes.sistayudantes.API to javafx.fxml;
     exports com.sistema.ayudantes.sistayudantes.API.DataInterfaces;
     opens com.sistema.ayudantes.sistayudantes.API.DataInterfaces to javafx.fxml;
+    exports com.sistema.ayudantes.sistayudantes.Frontend;
+    opens com.sistema.ayudantes.sistayudantes.Frontend to javafx.fxml;
 }
