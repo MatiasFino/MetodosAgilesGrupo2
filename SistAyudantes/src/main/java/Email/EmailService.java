@@ -1,4 +1,5 @@
 package Email;
+
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -43,11 +44,22 @@ public class EmailService {
     }
 
     public int notificarAyudante(){
-        createEmail();
+        createEmail("JuanferQuintero", "MetodosAgiles");
         sendEmail();
         return 200;
     }
-    private void createEmail() {
+
+    public void setContent(MimeMessage mail){
+        ConfirmationEmail content = new ConfirmationEmail();
+        //hay que pasarle nombre del postulante y materia
+        try {
+            message.setText(content.buildEmail("ayudante", "materia"));
+        } catch (MessagingException e) {
+            System.out.println("no se pudo cargar el html del mail");
+            throw new RuntimeException(e);
+        }
+    }
+    private void createEmail(String nombre, String materia) {
         properties = new Properties();
         properties.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.setProperty("mail.smtp.user", SENDER);
@@ -77,7 +89,8 @@ public class EmailService {
             throw new RuntimeException(e);
         }
         try {
-            message.setText(content,"ISO-8859-1","html");
+            // Aqui hay que agregarle el setContent y pasarle nombre y materia sacado del excel.
+            message.setText(ConfirmationEmail.buildEmail(nombre,materia),"ISO-8859-1","html");
         } catch (MessagingException e) {
             System.out.println("Error, Text value is not valid");
             throw new RuntimeException(e);
