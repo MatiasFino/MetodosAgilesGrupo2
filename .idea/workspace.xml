@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ed6156d3-19be-47c2-ad74-abd5919e1402" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/images/usuario.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2G6rUIzXKZHKWMwFHaGIGtCBd8B" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/Usuario/Desktop/TP_Agiles/MetodosAgilesGrupo2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\Usuario\Desktop\TP_Agiles\MetodosAgilesGrupo2\SistAyudantes\src\main\resources\com\sistema\ayudantes\sistayudantes\images" />
+      <recent name="D:\Users\Usuario\Desktop\TP_Agiles\MetodosAgilesGrupo2\SistAyudantes\src\main\resources\com\sistema\ayudantes\sistayudantes" />
+      <recent name="D:\Users\Usuario\Desktop\TP_Agiles\MetodosAgilesGrupo2\SistAyudantes\src\main\java\com\sistema\ayudantes\sistayudantes" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed6156d3-19be-47c2-ad74-abd5919e1402" name="Changes" comment="" />
+      <created>1665719888480</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665719888480</updated>
+      <workItem from="1665719890131" duration="57000" />
+      <workItem from="1665720749826" duration="27000" />
+      <workItem from="1665779835620" duration="1748000" />
+      <workItem from="1665791730442" duration="1738000" />
+      <workItem from="1665800400163" duration="34000" />
+      <workItem from="1665804624176" duration="11308000" />
+      <workItem from="1665843060283" duration="4204000" />
+      <workItem from="1666099473269" duration="9056000" />
+      <workItem from="1666125842885" duration="10215000" />
+      <workItem from="1666136908351" duration="118000" />
+      <workItem from="1666137092425" duration="565000" />
+      <workItem from="1666145212818" duration="5514000" />
+      <workItem from="1666184217116" duration="2046000" />
+      <workItem from="1666205851979" duration="127000" />
+      <workItem from="1666218003307" duration="661000" />
+      <workItem from="1666240678139" duration="2253000" />
+      <workItem from="1666272837772" duration="912000" />
+      <workItem from="1666273806604" duration="9000" />
+      <workItem from="1666276937636" duration="608000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassCastException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MetodosAgilesGrupo2$MainApplication.ic" NAME="MainApplication Coverage Results" MODIFIED="1666070192033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.sistema.ayudantes.sistayudantes.*</FILTER>
+    </SUITE>
+  </component>
+</project>

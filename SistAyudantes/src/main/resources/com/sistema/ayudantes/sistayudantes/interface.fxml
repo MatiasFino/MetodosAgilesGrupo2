@@ -1,16 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ayudantes.sistayudantes.InterfaceController">
+    <children>
+        <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="575.0" prefWidth="879.0" stylesheets="@estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="83.0" fitWidth="224.0" layoutX="624.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/LogoExactas.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="subjectsButton" contentDisplay="CENTER" layoutX="335.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onSubjectsButtonClicked" prefHeight="32.0" prefWidth="209.0" stylesheets="@estilo.css" text="Ver lista de materias" textAlignment="JUSTIFY">
+                    <font>
+                        <Font name="Tw Cen MT" size="15.0" />
+                    </font></Button>
+                <Label fx:id="tituloAsignacion" layoutX="185.0" layoutY="194.0" prefHeight="50.0" prefWidth="510.0" stylesheets="@estilo.css" text="Asignación de ayudantes interinos" textFill="#404040" textOverrun="CLIP">
+                    <font>
+                        <Font name="Tw Cen MT" size="35.0" />
+                    </font>
+                </Label>
+                <Button fx:id="botonSalir" layoutX="335.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#onExitButtonClicked" prefHeight="27.0" prefWidth="209.0" stylesheets="@estilo.css" text="Salir">
+               <font>
+                  <Font name="Tw Cen MT" size="15.0" />
+               </font></Button>
+                <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                    <image>
+                        <Image url="@images/back.png" />
+                    </image>
+                </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="483.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/exit.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="510.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/lista.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="subjectsPanel" prefHeight="575.0" prefWidth="879.0" visible="false">
+            <children>
+            <Button fx:id="back1" layoutX="310.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onBackPrincipalPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver">
+               <font>
+                  <Font name="Tw Cen MT" size="16.0" />
+               </font></Button>
+            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="323.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/volver.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="viewAssistants" layoutX="487.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onViewAssistantsChoiceClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text="Ver ayudantes">
+               <font>
+                  <Font name="Tw Cen MT" size="16.0" />
+               </font></Button>
+            <Text fx:id="txtNotification" layoutX="170.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="572.13671875">
+               <font>
+                  <Font name="Tw Cen MT" size="15.0" />
+               </font></Text>
+            <HBox fx:id="Barra" layoutY="-7.0" prefHeight="50.0" prefWidth="879.0" stylesheets="@estilo.css">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@images/usuario.png" />
+                     </image>
+                  </ImageView>
+                  <Separator prefHeight="3.0" prefWidth="699.0" />
+                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/LogoExactas.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <TableView fx:id="subjectsTable" layoutX="19.0" layoutY="66.0" prefHeight="411.0" prefWidth="842.0" stylesheets="@estilo.css" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="assistantsPanel" layoutY="-4.0" prefHeight="583.0" prefWidth="870.0" visible="false">
+         <children>
+            <Button fx:id="volver_materia" layoutX="394.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#onBackSubjectsPanelButtonClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text=" Volver">
+               <font>
+                  <Font name="Tw Cen MT" size="16.0" />
+               </font></Button>
+            <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="407.0" layoutY="524.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/volver.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="cantidadAyudantia" alignment="CENTER" layoutX="218.0" layoutY="101.0" prefHeight="37.0" prefWidth="444.0" textAlignment="CENTER">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font></Label>
+            <TableView fx:id="assistantsTable" layoutX="45.0" layoutY="149.0" prefHeight="349.0" prefWidth="790.0" stylesheets="@estilo.css" />
+            <Label layoutX="179.0" layoutY="61.0" prefHeight="32.0" prefWidth="386.0" text="Ayudantes interinos de la materia:">
+               <font>
+                  <Font name="Tw Cen MT" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameSubject" layoutX="585.0" layoutY="52.0" prefHeight="49.0" prefWidth="118.0">
+               <font>
+                  <Font name="Tw Cen MT" size="27.0" />
+               </font>
+            </Label>
+            <HBox fx:id="Barra2" prefHeight="48.0" prefWidth="880.0" stylesheets="@estilo.css">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="10.0" top="7.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@images/usuario.png" />
+                     </image>
+                  </ImageView>
+                  <Separator prefHeight="0.0" prefWidth="704.0" />
+                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/LogoExactas.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
