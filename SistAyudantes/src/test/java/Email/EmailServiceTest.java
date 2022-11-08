@@ -9,7 +9,7 @@ class EmailServiceTest {
     @Test
     void notificarAyudante() {
         EmailService test = new EmailService();
-        int resultado = test.notificarAyudante();
+        int resultado = test.notificarAyudante("JuanferQuintero", "MetodosAgiles");
     assertEquals(200,resultado);
     }
 }

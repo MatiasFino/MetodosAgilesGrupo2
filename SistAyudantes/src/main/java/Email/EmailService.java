@@ -43,17 +43,16 @@ public class EmailService {
         this.content = content;
     }
 
-    public int notificarAyudante(){
-        createEmail("JuanferQuintero", "MetodosAgiles");
+    public int notificarAyudante(String nombre, String materia){
+        createEmail(nombre, materia);
         sendEmail();
         return 200;
     }
 
     public void setContent(MimeMessage mail){
-        ConfirmationEmail content = new ConfirmationEmail();
         //hay que pasarle nombre del postulante y materia
         try {
-            message.setText(content.buildEmail("ayudante", "materia"));
+            message.setText(ConfirmationEmail.buildEmail("ayudante", "materia"));
         } catch (MessagingException e) {
             System.out.println("no se pudo cargar el html del mail");
             throw new RuntimeException(e);
