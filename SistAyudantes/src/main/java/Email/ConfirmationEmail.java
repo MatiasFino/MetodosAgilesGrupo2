@@ -6,7 +6,7 @@ public class ConfirmationEmail {
 
     @Description("retorna el html con el formato del mail como String. nombre refiere al ayudante y materia a la que se lo esta invitando")
 
-    public static String buildEmail(String nombre, String materia){
+    public static String buildEmail(String nombre, String materia, String id_materia, String id_persona){
         return  "<html lang=\"en\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:v=\"urn:schemas-microsoft-com:vml\">\n" +
                 "<head>\n" +
                 "    <title></title>\n" +
