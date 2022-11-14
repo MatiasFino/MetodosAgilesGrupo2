@@ -1,23 +1,21 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import Email.EmailService;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-
-import javafx.util.Pair;
+import java.util.*;
 
 public class Controller {
     private ArrayList<Materia> materias; 
     private Hashtable<Integer, Postulante> postulantes; //idPostulante, Postulante
+
+	private EmailService mailService;
     
-    public Controller(){
-        this.materias=new ArrayList<Materia>();
+    public Controller(EmailService mailService){
+		this.mailService = mailService;
+		this.materias=new ArrayList<Materia>();
         this.postulantes=new Hashtable<Integer, Postulante>();
     }
     
@@ -73,7 +71,7 @@ public class Controller {
 
    //Se recibe un csv con ordenes de merito de cada postulante, y se le agrega a cada materia (cargadas previamente) el postulante leido.
     public void cargarPostulantes(String csv){
-    	ArrayList <String[]> dPostulantes= new ArrayList<String[]>(); //guaradamos en un ArrayList los datos por postulante y el id de la materia a la que se postula
+    	ArrayList <String[]> dPostulantes= new ArrayList<String[]>(); //guardamos en un ArrayList los datos por postulante y el id de la materia a la que se postula
     	this.extraerLineasCsv(csv, dPostulantes); //linea: ID materia, ID postulante, tipo de postulante, nombre del postulante, email, cantidad horas que trabaja, cantidad de materias asignadas
     	for (String[] dpostulante: dPostulantes) {
     		if (existeMateria(Integer.parseInt(dpostulante[0]))) {
@@ -105,10 +103,22 @@ public class Controller {
     }
 
     public void asignarAyudantes(){
-        
+        List<Postulante> postulantesMateria;
+
+		for(Materia mat : this.materias) {
+			postulantesMateria = mat.getPostulantes();
+			//hay que mandar solicitudes hasta la cantidad de ayudantes solicitada y esperar que acepten
+			for(Postulante pos : postulantesMateria) {
+				//hay que usar el otro setContent (mime message) pero este podría usar el content seteado como string
+				//todos los sets...
+				this.mailService.setContent("");
+				//debería poder poner el nombre y la materia en notificar Ayudante
+				this.mailService.notificarAyudante(pos.getApellido_nombre(), mat.getNombre());
+			}
+		}
     }
 
-	//Obtener ayuudantes de una materia por id. Utilizado una vez que se realizaron las asignaciones
+	//Obtener ayudantes de una materia por ID. Utilizado una vez que se realizaron las asignaciones
     public List<Postulante> ayudantesMateria(int id) {
 		for(Materia m : this.materias) {
 			if(m.getId() == id) {

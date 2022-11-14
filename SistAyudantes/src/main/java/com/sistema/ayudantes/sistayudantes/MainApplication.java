@@ -1,6 +1,7 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
+import Email.EmailService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,10 +23,12 @@ public class MainApplication extends Application {
     public static void main(String[] args) throws IOException {
         APIEndpoints.configureRoutes();
         launch();
-        Controller c= new Controller();
+        EmailService mailService = new EmailService();
+        Controller c= new Controller(mailService);
         c.cargarMaterias("cuantificador-grupo1.csv");
         c.cargarPostulantes("orden-merito.csv");
         c.imprimirPostulantesxMateria();
-        c.imprimirTotalPostulates();        
+        c.imprimirTotalPostulates();
+        c.asignarAyudantes();
     }
 }

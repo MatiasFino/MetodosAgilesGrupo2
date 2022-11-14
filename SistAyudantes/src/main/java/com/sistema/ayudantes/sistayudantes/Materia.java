@@ -33,7 +33,15 @@ public class Materia {
     public int getId() {
     	return id;
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public int getCantAyudantes() {
     	return this.cantAyudantes;
     }
@@ -46,6 +54,10 @@ public class Materia {
     }
     public List<Postulante> getAyudantes() {
         return Collections.unmodifiableList(this.ayudantes);
+    }
+
+    public List<Postulante> getPostulantes() {
+        return Collections.unmodifiableList(this.postulantes);
     }
     
 }

@@ -6,6 +6,7 @@ module com.sistema.ayudantes.sistayudantes {
     requires org.json;
     requires com.fasterxml.jackson.databind;
     requires okhttp3;
+    requires jdk.jfr;
 
 
     opens com.sistema.ayudantes.sistayudantes to javafx.fxml;
