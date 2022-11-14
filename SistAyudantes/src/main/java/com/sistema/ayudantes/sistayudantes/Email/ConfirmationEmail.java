@@ -1,4 +1,4 @@
-package Email;
+package com.sistema.ayudantes.sistayudantes.Email;
 
 import jdk.jfr.Description;
 

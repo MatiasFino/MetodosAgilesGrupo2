@@ -1,6 +1,6 @@
 package com.sistema.ayudantes.sistayudantes;
 
-import Email.EmailService;
+import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

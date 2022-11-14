@@ -1,7 +1,7 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
-import Email.EmailService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

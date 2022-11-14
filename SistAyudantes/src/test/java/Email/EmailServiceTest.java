@@ -1,5 +1,6 @@
 package Email;
 
+import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
