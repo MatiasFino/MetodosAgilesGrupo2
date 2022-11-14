@@ -1,11 +1,11 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
-import com.sistema.ayudantes.sistayudantes.API.APIRequest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class MainApplication extends Application {
@@ -21,7 +21,6 @@ public class MainApplication extends Application {
     
     public static void main(String[] args) throws IOException {
         APIEndpoints.configureRoutes();
-        APIRequest.getMaterias();
         launch();
     }
 }
