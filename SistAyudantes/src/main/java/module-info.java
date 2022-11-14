@@ -7,6 +7,7 @@ module com.sistema.ayudantes.sistayudantes {
     requires com.fasterxml.jackson.databind;
     requires okhttp3;
     requires jdk.jfr;
+    requires javax.mail.api;
 
 
     opens com.sistema.ayudantes.sistayudantes to javafx.fxml;
