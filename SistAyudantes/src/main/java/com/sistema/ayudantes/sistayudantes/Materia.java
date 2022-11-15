@@ -43,7 +43,7 @@ public class Materia {
     }
 
     public int getCantAyudantes() {
-    	return this.cantAyudantes;
+    	return this.cantAyudantes + this.cantGraduados;
     }
     
     public void imprimirPostulantes() {

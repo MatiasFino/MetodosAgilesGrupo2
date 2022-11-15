@@ -1,5 +1,7 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
 import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 
 import java.io.BufferedReader;
@@ -64,6 +66,8 @@ public class Controller {
     	for (String[] dmateria: dmaterias) { 
     		Materia m = new Materia(Integer.parseInt(dmateria[0]),dmateria[1],Integer.parseInt(dmateria[2]),Integer.parseInt(dmateria[3])); //ID Materia, nombre materia, cantidadAyudantes, cantidadGraduados (1,materia1,5,2)
             this.materias.add(m);
+			MateriaCollection mc = MateriaCollection.getInstance();
+			mc.insert(new MateriaDTO(Integer.toString(m.getId()), m.getNombre(), 0, m.getCantAyudantes()));
     	}
         System.out.println("Cantidad de materias cargadas: "+ this.materias.size());
 
