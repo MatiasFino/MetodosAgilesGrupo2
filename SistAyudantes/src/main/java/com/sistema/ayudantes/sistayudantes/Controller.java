@@ -2,7 +2,9 @@ package com.sistema.ayudantes.sistayudantes;
 
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
-import com.sistema.ayudantes.sistayudantes.Email.EmailService;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaDTO;
+import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,10 +15,7 @@ public class Controller {
     private ArrayList<Materia> materias; 
     private Hashtable<Integer, Postulante> postulantes; //idPostulante, Postulante
 
-	private EmailService mailService;
-    
-    public Controller(EmailService mailService){
-		this.mailService = mailService;
+    public Controller(){
 		this.materias=new ArrayList<Materia>();
         this.postulantes=new Hashtable<Integer, Postulante>();
     }
@@ -66,6 +65,8 @@ public class Controller {
     	for (String[] dmateria: dmaterias) { 
     		Materia m = new Materia(Integer.parseInt(dmateria[0]),dmateria[1],Integer.parseInt(dmateria[2]),Integer.parseInt(dmateria[3])); //ID Materia, nombre materia, cantidadAyudantes, cantidadGraduados (1,materia1,5,2)
             this.materias.add(m);
+
+			//almacena en la base de datos
 			MateriaCollection mc = MateriaCollection.getInstance();
 			mc.insert(new MateriaDTO(Integer.toString(m.getId()), m.getNombre(), 0, m.getCantAyudantes()));
     	}
@@ -83,6 +84,18 @@ public class Controller {
     				Postulante p = new Postulante(Integer.parseInt(dpostulante[1]), dpostulante[2].charAt(0), dpostulante[3], dpostulante[4], Integer.parseInt(dpostulante[5]), Integer.parseInt(dpostulante[6]));
     				this.postulantes.put(Integer.parseInt(dpostulante[1]), p);
     				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
+
+					//almacena en la base de datos
+					PersonaCollection pc = PersonaCollection.getInstance();
+					String[] nombreCompleto = p.getApellido_nombre().split(" ");
+					pc.insert(new PersonaDTO(
+							Integer.toString(p.getId()),
+							nombreCompleto[0],
+							String.join(" ", Arrays.copyOfRange(nombreCompleto, 1, nombreCompleto.length)),
+							p.getEmail(),
+							String.valueOf(p.getTipo()),
+							p.getCant_materias()
+					));
     			}
     			else 
     				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), this.postulantes.get(Integer.parseInt(dpostulante[1])));
@@ -115,9 +128,8 @@ public class Controller {
 			for(Postulante pos : postulantesMateria) {
 				//hay que usar el otro setContent (mime message) pero este podría usar el content seteado como string
 				//todos los sets...
-				this.mailService.setContent("");
 				//debería poder poner el nombre y la materia en notificar Ayudante
-				this.mailService.notificarAyudante(pos.getApellido_nombre(), mat.getNombre());
+				EmailSender.notificarAyudante(pos, mat);
 			}
 		}
     }
