@@ -9,9 +9,9 @@ import java.util.Properties;
 public class EmailService {
     public static final String SENDER = "metodosagiles2022@gmail.com";
     private static final String PASSWORD = "olxwzwqojutdejoi";
-    private String subject = "Si lees esto, el mail funciona y Boca murio el 9 de diciembre de 2018";
+    private String subject = "Ayudantía Materia";
     private String recipient = SENDER;
-    private String content = "TOMALA VOS, DAMELA A MI, EL QUE NO SALTA, MURIO EN MADRIIID";
+    private String content = "";
     private Properties properties;
     private Session session;
     private MimeMessage message;
