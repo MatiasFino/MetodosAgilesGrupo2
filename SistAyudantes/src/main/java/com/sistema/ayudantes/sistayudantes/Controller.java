@@ -129,22 +129,26 @@ public class Controller {
 	public void agregarAyudanteMateria(int idMateria, int idAyudante){
 		Postulante p = this.postulantes.get(idAyudante);
 		p.restarMateriaPendiente();
+		p.addMateria();
 		for(Materia mat : this.materias){
 			if (mat.getId()==idMateria){
 				mat.addAyudante(p);
+				mat.restarSolicitudEnviada();
 				if(mat.materiaCompleta()){
-					for (Postulante pos : mat.getPostulantes()){
-						pos.restarMateriaPendiente();
-						if (pos.getMateriasPendientes() == 0){
-							this.postulantesDisponibles.add(p);
+					for (Postulante posLiberado : mat.getPostulantes()){
+						posLiberado.restarMateriaPendiente();
+						if (posLiberado.getMateriasPendientes() == 0){
+							this.postulantesDisponibles.add(posLiberado);
 						}
 					}
 				}
-			}
-			else{
 				return;
 			}
 		}
+	}
+
+	public boolean confirmarDisponibilidad(int idAyudante){
+		return this.postulantes.get(idAyudante).disponibleAyudantia();
 	}
 
 	//recorre todas las materias y en cada una solicita enviar las invitaciones a postulantes graduados y alumnos
@@ -159,20 +163,45 @@ public class Controller {
 	public void asignarAyudanteMateria(int idMateria){
 		for(Materia mat : this.materias){
 			if (mat.getId()==idMateria){
-				mat.solicitarAyudantes(this.mailService);
+				while (!mat.solicitarAyudantes(this.mailService)){
+					Postulante p = postulanteDisponible();
+					if (p == null){
+						return;
+					}else{
+						p.addMateriaPendiente();
+						mat.sumarSolicitudEnviada();
+						enviarMail(p.getApellido_nombre(), mat.getNombre());
+					}
+				}
 				return;
 			}
 		}
 	}
 
+	public void enviarMail(String nombrePos, String nombreMat){
+        System.out.println("se envio mail a "+nombrePos+" por para de la materia"+nombreMat+" la cual era una materia que no se postulo");
+    }
+
 	//retorna un ayudante disponible, un ayudante disponible es aquel que no como postulante en ninguna materia que no este completa
 	public Postulante postulanteDisponible(){
 		for (Postulante p : this.postulantesDisponibles){
 			if (p.disponibleAyudantia()){
+				this.postulantesDisponibles.remove(p);
 				return p;
 			}
 		}
 		return null;
+	}
+
+	public void rechazarSolicitud(int idMateria, int idAyudante){
+		this.postulantes.get(idAyudante).restarMateriaPendiente();
+		for(Materia mat : this.materias){
+			if (mat.getId()==idMateria){
+				mat.restarSolicitudEnviada();
+			}
+		}
+		asignarAyudanteMateria(idMateria);
+
 	}
 
 	//Obtener ayudantes de una materia por ID. Utilizado una vez que se realizaron las asignaciones

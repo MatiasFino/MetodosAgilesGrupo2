@@ -39,9 +39,10 @@ public class Materia {
 
     //recorre los postulantes y envia invitacion a los graduados hasta completar la cantidad de graduados necesaria o se quede sin postulabtes la materia
     public void solicitarAyudantesGraduados(EmailService mailService){
-        Iterator <Postulante> p = this.postulantes.iterator();
+        ArrayList<Postulante> postuAux = (ArrayList<Postulante>) this.postulantes.clone();
+        Iterator <Postulante> p = postuAux.iterator();
         Postulante aux;
-        while (p.hasNext() || cantGraduados <= this.solicitudesEnviadas+this.ayudantes.size()){
+        while ((p.hasNext()) && (this.cantGraduados > this.solicitudesEnviadas+this.ayudantes.size())){
             aux = p.next();
             if (aux.isGraduado() && aux.disponibleAyudantia()){
                 this.postulantes.remove(aux);
@@ -54,7 +55,8 @@ public class Materia {
     //recorre todos los postulantes de la materia y le envia invitacion en caso de que el mismo pueda
     //devuelve false en caso de que falten enviar solicitudes pero no disponga de ayudantes
     public boolean solicitarAyudantes(EmailService mailService) {
-        for(Postulante p : this.postulantes){
+        ArrayList<Postulante> aux = (ArrayList<Postulante>) this.postulantes.clone();
+        for(Postulante p : aux){
             if (this.cantAyudantes == this.solicitudesEnviadas+this.ayudantes.size()){
                 return true;
             }
@@ -70,7 +72,7 @@ public class Materia {
     }
 
     public void enviarMail(String nombrePos){
-        System.out.println("se envio mail a "+nombrePos+" por para de la materia"+this.id);
+        System.out.println("se envio mail a "+nombrePos+" por para de la materia"+this.nombre);
     }
 
     public void removePostulante (Postulante p){
@@ -97,6 +99,14 @@ public class Materia {
     	return this.cantAyudantes + this.cantGraduados;
     }
     
+    public void restarSolicitudEnviada(){
+        this.solicitudesEnviadas--;
+    }
+
+    public void sumarSolicitudEnviada(){
+        this.solicitudesEnviadas++;
+    }
+
     public void imprimirPostulantes() {
     	System.out.println("Postulantes a la MATERIA: " + this.getId());
     	for (Postulante p: this.postulantes) {

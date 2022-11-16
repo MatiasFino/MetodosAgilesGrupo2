@@ -1,6 +1,7 @@
 package com.sistema.ayudantes.sistayudantes.API;
 
 import com.mongodb.BasicDBObject;
+import com.sistema.ayudantes.sistayudantes.Controller;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
@@ -52,17 +53,27 @@ public class APIEndpoints {
     private static final Route aceptarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
-        AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
-        boolean insercion = asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, true));
-
-        if (insercion) {
-            MateriaCollection materiaCollection = MateriaCollection.getInstance();
-            Document materia = materiaCollection.getMaterias(new BasicDBObject("id", id_materia)).cursor().next();
-            Integer cantidadAsignados = materia.getInteger("ayudantesAsignados");
-            BasicDBObject newDocument = new BasicDBObject("ayudantesAsignados", cantidadAsignados + 1);
-            materiaCollection.update(id_materia, newDocument);
-            return "Has sido asignado a la materia";
-        } else {
+        Controller controllerIns = Controller.getInstance(null);
+        if (controllerIns.confirmarDisponibilidad(Integer.parseInt(id_persona))){
+            controllerIns.agregarAyudanteMateria(Integer.parseInt(id_materia),Integer.parseInt(id_persona));
+            AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
+            boolean insercion = asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, true));
+    
+            if (insercion) {
+                MateriaCollection materiaCollection = MateriaCollection.getInstance();
+                Document materia = materiaCollection.getMaterias(new BasicDBObject("id", id_materia)).cursor().next();
+                Integer cantidadAsignados = materia.getInteger("ayudantesAsignados");
+                BasicDBObject newDocument = new BasicDBObject("ayudantesAsignados", cantidadAsignados + 1);
+                materiaCollection.update(id_materia, newDocument);
+                return "Has sido asignado a la materia";
+            } else {
+                return "Ya habiamos registrado tu respuesta";
+            }
+        }else{
+            boolean insercion = descartarPostulante(id_persona,id_materia);
+            if (insercion)
+            return "Se rechazo la solicitud ya que ocupaste la maxima cantidad de ayudantias que podias";
+        else
             return "Ya habiamos registrado tu respuesta";
         }
 
@@ -71,12 +82,19 @@ public class APIEndpoints {
     private static final Route rechazarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
-        AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
-        boolean insercion = asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, false));
+        boolean insercion = descartarPostulante(id_persona,id_materia);
 
         if (insercion)
             return "Has rechazado la asignacion a la materia";
         else
             return "Ya habiamos registrado tu respuesta";
+    };
+
+    private static boolean descartarPostulante(String id_persona, String id_materia){
+        Controller controllerIns = Controller.getInstance(null);
+        controllerIns.rechazarSolicitud(Integer.parseInt(id_materia),Integer.parseInt(id_persona));
+        AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
+        return asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, false));
+
     };
 }
