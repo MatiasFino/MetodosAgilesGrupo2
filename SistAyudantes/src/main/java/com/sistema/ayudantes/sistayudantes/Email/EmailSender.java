@@ -8,7 +8,6 @@ import java.util.UUID;
 public class EmailSender {
 
     public static int notificarAyudante(Postulante postulante, Materia materia, UUID token) {
-        System.out.println("token "+ token.toString());
         try {
             EmailService emailSend = EmailService.getInstance();
             String emailHTML = ConfirmationEmail.buildEmail(
