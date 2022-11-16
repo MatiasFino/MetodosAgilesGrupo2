@@ -2,6 +2,7 @@ package com.sistema.ayudantes.sistayudantes.API;
 
 import com.mongodb.BasicDBObject;
 import com.sistema.ayudantes.sistayudantes.Controller;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
@@ -53,7 +54,22 @@ public class APIEndpoints {
     private static final Route aceptarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
-        Controller controllerIns = Controller.getInstance(null);
+        String requestToken = request.queryParams("token");
+        // corroborar que el token sea el mismo que el almacenado en la base de datos
+        AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+        BasicDBObject tokenQuery = new BasicDBObject("id_ayudante", id_persona)
+                                    .append("id_materia", id_materia);
+        for (Document token :  atc.getTokens(tokenQuery)) {
+            if (!token.getString("token").equals(requestToken)) {
+                return "El token es inválido";
+            }
+        }
+
+        boolean borrado = atc.delete(id_persona, id_materia);
+        if (!borrado) {
+            return "No se pudo almacenar tu respuesta";
+        }
+        Controller controllerIns = Controller.getInstance();
         if (controllerIns.confirmarDisponibilidad(Integer.parseInt(id_persona))){
             controllerIns.agregarAyudanteMateria(Integer.parseInt(id_materia),Integer.parseInt(id_persona));
             AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
@@ -82,6 +98,22 @@ public class APIEndpoints {
     private static final Route rechazarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
+        String requestToken = request.queryParams("token");
+        // corroborar que el token sea el mismo que el almacenado en la base de datos
+        AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+        BasicDBObject tokenQuery = new BasicDBObject("id_ayudante", id_persona)
+                .append("id_materia", id_materia);
+        for (Document token :  atc.getTokens(tokenQuery)) {
+            if (!token.getString("token").equals(requestToken)) {
+                return "El token es inválido";
+            }
+        }
+
+        boolean borrado = atc.delete(id_persona, id_materia);
+        if (!borrado) {
+            return "No se pudo almacenar tu respuesta";
+        }
+        
         boolean insercion = descartarPostulante(id_persona,id_materia);
 
         if (insercion)
@@ -91,7 +123,7 @@ public class APIEndpoints {
     };
 
     private static boolean descartarPostulante(String id_persona, String id_materia){
-        Controller controllerIns = Controller.getInstance(null);
+        Controller controllerIns = Controller.getInstance();
         controllerIns.rechazarSolicitud(Integer.parseInt(id_materia),Integer.parseInt(id_persona));
         AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
         return asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, false));

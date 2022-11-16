@@ -1,8 +1,12 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
-import com.sistema.ayudantes.sistayudantes.Email.EmailService;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaDTO;
+import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,23 +17,17 @@ public class Controller {
     private ArrayList<Materia> materias; 
     private Hashtable<Integer, Postulante> postulantes; //idPostulante, Postulante
 	private ArrayList<Postulante> postulantesDisponibles;
-	private EmailService mailService;
 	private static Controller controllerInstance;
-    
-    private Controller(EmailService mailService){
-		this.mailService = mailService;
+
+    private Controller(){
 		this.materias=new ArrayList<Materia>();
         this.postulantes=new Hashtable<Integer, Postulante>();
 		this.postulantesDisponibles = new ArrayList<Postulante>();
 	}
 
-	public static Controller getInstance(EmailService mailService){
+	public static Controller getInstance(){
 		if (controllerInstance == null){
-			if (mailService == null){
-				System.out.println("No se puede iniciar un Controller con mailservice en null");
-			}else{
-				controllerInstance = new Controller(mailService);
-			}
+			controllerInstance = new Controller();
 		}
 		return controllerInstance;
 	}
@@ -80,6 +78,8 @@ public class Controller {
     	for (String[] dmateria: dmaterias) { 
     		Materia m = new Materia(Integer.parseInt(dmateria[0]),dmateria[1],Integer.parseInt(dmateria[2]),Integer.parseInt(dmateria[3])); //ID Materia, nombre materia, cantidadAyudantes, cantidadGraduados (1,materia1,5,2)
             this.materias.add(m);
+
+			//almacena en la base de datos
 			MateriaCollection mc = MateriaCollection.getInstance();
 			mc.insert(new MateriaDTO(Integer.toString(m.getId()), m.getNombre(), 0, m.getCantAyudantes()));
     	}
@@ -98,6 +98,18 @@ public class Controller {
 					p.addMateriaPendiente();
     				this.postulantes.put(Integer.parseInt(dpostulante[1]), p);
     				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
+
+					//almacena en la base de datos
+					PersonaCollection pc = PersonaCollection.getInstance();
+					String[] nombreCompleto = p.getApellido_nombre().split(" ");
+					pc.insert(new PersonaDTO(
+							Integer.toString(p.getId()),
+							nombreCompleto[0],
+							String.join(" ", Arrays.copyOfRange(nombreCompleto, 1, nombreCompleto.length)),
+							p.getEmail(),
+							String.valueOf(p.getTipo()),
+							p.getCant_materias()
+					));
     			}
     			else {
 					Postulante p = this.postulantes.get(Integer.parseInt(dpostulante[1]));
@@ -151,11 +163,21 @@ public class Controller {
 		return this.postulantes.get(idAyudante).disponibleAyudantia();
 	}
 
+	public void enviarMail(Postulante postulante, Materia materia) {
+		//System.out.println("se envio mail a "+nombrePos+" por para de la materia"+nombreMat+" la cual era una materia que no se postulo");
+		AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+		UUID token = UUID.randomUUID();
+		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(materia.getId()), token.toString()));
+		//Se debe cambiar la funcion para que envie el mail de notificar a una persona que se postulo a otra materia
+		EmailSender.notificarAyudante(postulante, materia, token);
+	}
+
+
 	//recorre todas las materias y en cada una solicita enviar las invitaciones a postulantes graduados y alumnos
     public void asignarAyudantes(){
 		for(Materia mat : this.materias) {
-			mat.solicitarAyudantesGraduados(this.mailService);
-			mat.solicitarAyudantes(this.mailService);
+			mat.solicitarAyudantesGraduados();
+			mat.solicitarAyudantes();
 		}
     }
 
@@ -163,14 +185,14 @@ public class Controller {
 	public void asignarAyudanteMateria(int idMateria){
 		for(Materia mat : this.materias){
 			if (mat.getId()==idMateria){
-				while (!mat.solicitarAyudantes(this.mailService)){
+				while (!mat.solicitarAyudantes()){
 					Postulante p = postulanteDisponible();
 					if (p == null){
 						return;
 					}else{
 						p.addMateriaPendiente();
 						mat.sumarSolicitudEnviada();
-						enviarMail(p.getApellido_nombre(), mat.getNombre());
+						enviarMail(p, mat);
 					}
 				}
 				return;
@@ -178,9 +200,6 @@ public class Controller {
 		}
 	}
 
-	public void enviarMail(String nombrePos, String nombreMat){
-        System.out.println("se envio mail a "+nombrePos+" por para de la materia"+nombreMat+" la cual era una materia que no se postulo");
-    }
 
 	//retorna un ayudante disponible, un ayudante disponible es aquel que no como postulante en ninguna materia que no este completa
 	public Postulante postulanteDisponible(){

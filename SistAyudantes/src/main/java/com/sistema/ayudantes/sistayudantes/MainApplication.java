@@ -1,10 +1,6 @@
 package com.sistema.ayudantes.sistayudantes;
 
-import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
-import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
-import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,8 +21,7 @@ public class MainApplication extends Application {
     
     public static void main(String[] args) throws IOException {
         APIEndpoints.configureRoutes();
-        EmailService mailService = new EmailService();
-        Controller c= Controller.getInstance(mailService);
+        Controller c= Controller.getInstance();
         c.cargarMaterias("cuantificador-grupo1.csv");
         c.cargarPostulantes("orden-merito.csv");
         launch();

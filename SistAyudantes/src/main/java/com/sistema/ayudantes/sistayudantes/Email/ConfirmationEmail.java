@@ -6,7 +6,7 @@ public class ConfirmationEmail {
 
     @Description("retorna el html con el formato del mail como String. nombre refiere al ayudante y materia a la que se lo esta invitando")
 
-    public static String buildEmail(String nombre, String materia){
+    public static String buildEmail(String nombre, String materia, String id_ayudante, String id_materia, String token){
         return  "<html lang=\"en\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:v=\"urn:schemas-microsoft-com:vml\">\n" +
                 "<head>\n" +
                 "    <title></title>\n" +
@@ -228,13 +228,13 @@ public class ConfirmationEmail {
                 "                                                    <!--[if mso]>\n" +
                 "                                                    <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\"\n" +
                 "                                                                 xmlns:w=\"urn:schemas-microsoft-com:office:word\"\n" +
-                "                                                                 href=\"ACA VA EL LINK DE ACEPTACION\"\n" +
+                "                                                                 href=\"http://localhost:4567/aceptar-materia?id_persona="+id_ayudante+"&id_materia="+id_materia+"&token="+token+"\"\n" +
                 "                                                                 style=\"height:58px;width:235px;v-text-anchor:middle;\"\n" +
                 "                                                                 arcsize=\"7%\" stroke=\"false\" fillcolor=\"#3AAEE0\">\n" +
                 "                                                        <w:anchorlock/>\n" +
                 "                                                        <v:textbox inset=\"0px,0px,0px,0px\">\n" +
                 "                                                            <center style=\"color:#ffffff; font-family:Arial, sans-serif; font-size:24px\">\n" +
-                "                                                    <![endif]--><a href=\"ACA VA EL LINK DE ACEPTACION\" !--Aca va de verdad el link--\n" +
+                "                                                    <![endif]--><a href=\"http://localhost:4567/aceptar-materia?id_persona="+id_ayudante+"&id_materia="+id_materia+"&token="+token+"\" !--Aca va de verdad el link--\n" +
                 "                                                                   style=\"text-decoration:none;display:inline-block;color:#ffffff;background-color:#3AAEE0;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;\"\n" +
                 "                                                                   target=\"_blank\"><span\n" +
                 "                                                        style=\"padding-left:20px;padding-right:20px;font-size:24px;display:inline-block;letter-spacing:normal;\"><span\n" +
@@ -311,13 +311,13 @@ public class ConfirmationEmail {
                 "                                                    <!--[if mso]>\n" +
                 "                                                    <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\"\n" +
                 "                                                                 xmlns:w=\"urn:schemas-microsoft-com:office:word\"\n" +
-                "                                                                 href=\"ACA VA EL LINK DE RECHAZO\"\n" +
+                "                                                                 href=\"http://localhost:4567/rechazar-materia?id_persona="+id_ayudante+"&id_materia="+id_materia+"&token="+token+"\"\n" +
                 "                                                                 style=\"height:58px;width:255px;v-text-anchor:middle;\"\n" +
                 "                                                                 arcsize=\"7%\" stroke=\"false\" fillcolor=\"#3AAEE0\">\n" +
                 "                                                        <w:anchorlock/>\n" +
                 "                                                        <v:textbox inset=\"0px,0px,0px,0px\">\n" +
                 "                                                            <center style=\"color:#ffffff; font-family:Arial, sans-serif; font-size:24px\">\n" +
-                "                                                    <![endif]--><a href=\"ACA VA EL LINK DE RECHAZO\" !--Aca va de verdad el link--\n" +
+                "                                                    <![endif]--><a href=\"http://localhost:4567/rechazar-materia?id_persona="+id_ayudante+"&id_materia="+id_materia+"&token="+token+"\" !--Aca va de verdad el link--\n" +
                 "                                                                   style=\"text-decoration:none;display:inline-block;color:#ffffff;background-color:#3AAEE0;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;\"\n" +
                 "                                                                   target=\"_blank\"><span\n" +
                 "                                                        style=\"padding-left:20px;padding-right:20px;font-size:24px;display:inline-block;letter-spacing:normal;\"><span\n" +

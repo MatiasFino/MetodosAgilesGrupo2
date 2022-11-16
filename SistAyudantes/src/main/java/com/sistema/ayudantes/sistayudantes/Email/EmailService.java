@@ -7,16 +7,22 @@ import java.util.Properties;
 
 
 public class EmailService {
-    public static final String SENDER = "metodosagiles2022@gmail.com";
+    private static EmailService emailService;
+    private static final String SENDER = "metodosagiles2022@gmail.com";
     private static final String PASSWORD = "olxwzwqojutdejoi";
     private String subject = "Ayudantía Materia";
-    private String recipient = SENDER;
     private String content = "";
     private Properties properties;
     private Session session;
     private MimeMessage message;
 
-    public EmailService() {
+    private EmailService() {}
+
+    public static EmailService getInstance() {
+        if (emailService == null) {
+            emailService = new EmailService();
+        }
+        return emailService;
     }
 
     public String getSubject() {
@@ -27,14 +33,6 @@ public class EmailService {
         this.subject = subject;
     }
 
-    public String getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
-    }
-
     public String getContent() {
         return content;
     }
@@ -43,22 +41,13 @@ public class EmailService {
         this.content = content;
     }
 
-    public int notificarAyudante(String nombre, String materia){
-        createEmail(nombre, materia);
-        sendEmail();
+    public int sendEmail(String emailAddress, String emailContentAsHTML){
+        createEmail(emailAddress, emailContentAsHTML);
+        effectiveEmailSend();
         return 200;
     }
 
-    public void setContent(MimeMessage mail){
-        //hay que pasarle nombre del postulante y materia
-        try {
-            message.setText(ConfirmationEmail.buildEmail("ayudante", "materia"));
-        } catch (MessagingException e) {
-            System.out.println("no se pudo cargar el html del mail");
-            throw new RuntimeException(e);
-        }
-    }
-    private void createEmail(String nombre, String materia) {
+    private void createEmail(String emailAddress, String emailContentAsHTML) {
         properties = new Properties();
         properties.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.setProperty("mail.smtp.user", SENDER);
@@ -76,7 +65,7 @@ public class EmailService {
             throw new RuntimeException(e);
         }
         try {
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
         } catch (MessagingException e) {
             System.out.println("Error, recipient value is not valid");
             throw new RuntimeException(e);
@@ -89,7 +78,7 @@ public class EmailService {
         }
         try {
             // Aqui hay que agregarle el setContent y pasarle nombre y materia sacado del excel.
-            message.setText(ConfirmationEmail.buildEmail(nombre,materia),"ISO-8859-1","html");
+            message.setText(emailContentAsHTML,"ISO-8859-1","html");
         } catch (MessagingException e) {
             System.out.println("Error, Text value is not valid");
             throw new RuntimeException(e);
@@ -97,7 +86,7 @@ public class EmailService {
         System.out.println("Email Succesfuly created");
     }
 
-    private void sendEmail() {
+    private void effectiveEmailSend() {
         try {
             Transport transport = session.getTransport("smtp");
             try {

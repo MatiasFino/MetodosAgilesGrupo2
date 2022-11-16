@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenDTO;
+import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
 import com.sistema.ayudantes.sistayudantes.Email.EmailService;
 
 public class Materia {
@@ -38,7 +42,7 @@ public class Materia {
     }
 
     //recorre los postulantes y envia invitacion a los graduados hasta completar la cantidad de graduados necesaria o se quede sin postulabtes la materia
-    public void solicitarAyudantesGraduados(EmailService mailService){
+    public void solicitarAyudantesGraduados(){
         ArrayList<Postulante> postuAux = (ArrayList<Postulante>) this.postulantes.clone();
         Iterator <Postulante> p = postuAux.iterator();
         Postulante aux;
@@ -47,14 +51,14 @@ public class Materia {
             if (aux.isGraduado() && aux.disponibleAyudantia()){
                 this.postulantes.remove(aux);
                 this.solicitudesEnviadas++;
-                enviarMail(aux.getApellido_nombre());
+                enviarMail(aux);
             }
         } 
     }
 
     //recorre todos los postulantes de la materia y le envia invitacion en caso de que el mismo pueda
     //devuelve false en caso de que falten enviar solicitudes pero no disponga de ayudantes
-    public boolean solicitarAyudantes(EmailService mailService) {
+    public boolean solicitarAyudantes() {
         ArrayList<Postulante> aux = (ArrayList<Postulante>) this.postulantes.clone();
         for(Postulante p : aux){
             if (this.cantAyudantes == this.solicitudesEnviadas+this.ayudantes.size()){
@@ -63,7 +67,7 @@ public class Materia {
             if (p.disponibleAyudantia()){
                 this.postulantes.remove(p);
                 this.solicitudesEnviadas++;
-                enviarMail(p.getApellido_nombre());
+                enviarMail(p);
             }else{
                 this.postulantes.remove(p);
             }
@@ -71,8 +75,12 @@ public class Materia {
         return this.cantAyudantes == this.solicitudesEnviadas+this.ayudantes.size();
     }
 
-    public void enviarMail(String nombrePos){
-        System.out.println("se envio mail a "+nombrePos+" por para de la materia"+this.nombre);
+    public void enviarMail(Postulante postulante){
+        //System.out.println("se envio mail a "+nombrePos+" por para de la materia"+this.nombre);
+        AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+		UUID token = UUID.randomUUID();
+		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(this.getId()), token.toString()));
+		EmailSender.notificarAyudante(postulante, this, token);
     }
 
     public void removePostulante (Postulante p){
