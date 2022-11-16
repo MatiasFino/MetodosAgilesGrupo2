@@ -1,5 +1,7 @@
 package com.sistema.ayudantes.sistayudantes;
 
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaCollection;
@@ -119,6 +121,13 @@ public class Controller {
     	}
     }
 
+	public void asignarAyudante(Postulante postulante, Materia materia) {
+		AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+		UUID token = UUID.randomUUID();
+		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(materia.getId()), token.toString()));
+		EmailSender.notificarAyudante(postulante, materia, token);
+	}
+
     public void asignarAyudantes(){
         List<Postulante> postulantesMateria;
 
@@ -129,7 +138,7 @@ public class Controller {
 				//hay que usar el otro setContent (mime message) pero este podría usar el content seteado como string
 				//todos los sets...
 				//debería poder poner el nombre y la materia en notificar Ayudante
-				EmailSender.notificarAyudante(pos, mat);
+				this.asignarAyudante(pos, mat);
 			}
 		}
     }

@@ -1,6 +1,7 @@
 package com.sistema.ayudantes.sistayudantes.API;
 
 import com.mongodb.BasicDBObject;
+import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaCollection;
@@ -52,6 +53,22 @@ public class APIEndpoints {
     private static final Route aceptarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
+        String requestToken = request.queryParams("token");
+        // corroborar que el token sea el mismo que el almacenado en la base de datos
+        AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+        BasicDBObject tokenQuery = new BasicDBObject("id_ayudante", id_persona)
+                                       .append("id_materia", id_materia);
+        for (Document token :  atc.getTokens(tokenQuery)) {
+            if (!token.getString("token").equals(requestToken)) {
+                return "El token es inválido";
+            }
+        }
+
+        boolean borrado = atc.delete(id_persona, id_materia);
+        if (!borrado) {
+            return "No se pudo almacenar tu respuesta";
+        }
+
         AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
         boolean insercion = asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, true));
 
@@ -71,6 +88,22 @@ public class APIEndpoints {
     private static final Route rechazarMateria = (request, response) -> {
         String id_persona = request.queryParams("id_persona");
         String id_materia = request.queryParams("id_materia");
+        String requestToken = request.queryParams("token");
+        // corroborar que el token sea el mismo que el almacenado en la base de datos
+        AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
+        BasicDBObject tokenQuery = new BasicDBObject("id_ayudante", id_persona)
+                .append("id_materia", id_materia);
+        for (Document token :  atc.getTokens(tokenQuery)) {
+            if (!token.getString("token").equals(requestToken)) {
+                return "El token es inválido";
+            }
+        }
+
+        boolean borrado = atc.delete(id_persona, id_materia);
+        if (!borrado) {
+            return "No se pudo almacenar tu respuesta";
+        }
+        
         AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();
         boolean insercion = asignacionMateriaCollection.insert(new AsignacionMateriaDTO(id_persona, id_materia, false));
 
