@@ -12,14 +12,28 @@ import java.util.*;
 public class Controller {
     private ArrayList<Materia> materias; 
     private Hashtable<Integer, Postulante> postulantes; //idPostulante, Postulante
-
+	private ArrayList<Postulante> postulantesDisponibles;
 	private EmailService mailService;
+	private static Controller controllerInstance;
     
-    public Controller(EmailService mailService){
+    private Controller(EmailService mailService){
 		this.mailService = mailService;
 		this.materias=new ArrayList<Materia>();
         this.postulantes=new Hashtable<Integer, Postulante>();
-    }
+		this.postulantesDisponibles = new ArrayList<Postulante>();
+	}
+
+	public static Controller getInstance(EmailService mailService){
+		if (controllerInstance == null){
+			if (mailService == null){
+				System.out.println("No se puede iniciar un Controller con mailservice en null");
+			}else{
+				controllerInstance = new Controller(mailService);
+			}
+		}
+		return controllerInstance;
+	}
+
     
     private void extraerLineasCsv(String csv, ArrayList<String[]> filasCsv){ //csv cuantificador del grupo1   csv= Documentos/archivo.csv
 	        
@@ -81,12 +95,16 @@ public class Controller {
     		if (existeMateria(Integer.parseInt(dpostulante[0]))) {
     			if (!this.postulantes.containsKey(Integer.parseInt(dpostulante[1]))) {
     				Postulante p = new Postulante(Integer.parseInt(dpostulante[1]), dpostulante[2].charAt(0), dpostulante[3], dpostulante[4], Integer.parseInt(dpostulante[5]), Integer.parseInt(dpostulante[6]));
+					p.addMateriaPendiente();
     				this.postulantes.put(Integer.parseInt(dpostulante[1]), p);
     				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
     			}
-    			else 
-    				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), this.postulantes.get(Integer.parseInt(dpostulante[1])));
-    		}
+    			else {
+					Postulante p = this.postulantes.get(Integer.parseInt(dpostulante[1]));
+					p.addMateriaPendiente();
+    				this.cargarPostulanteMateria(Integer.parseInt(dpostulante[0]), p);
+				}
+			}
     	}
     }
     
@@ -106,21 +124,56 @@ public class Controller {
     	}
     }
 
-    public void asignarAyudantes(){
-        List<Postulante> postulantesMateria;
-
-		for(Materia mat : this.materias) {
-			postulantesMateria = mat.getPostulantes();
-			//hay que mandar solicitudes hasta la cantidad de ayudantes solicitada y esperar que acepten
-			for(Postulante pos : postulantesMateria) {
-				//hay que usar el otro setContent (mime message) pero este podría usar el content seteado como string
-				//todos los sets...
-				this.mailService.setContent("");
-				//debería poder poner el nombre y la materia en notificar Ayudante
-				this.mailService.notificarAyudante(pos.getApellido_nombre(), mat.getNombre());
+	/*Agrega un postulante a la lista de ayudantes, ademas en caso de que esa materia se complete se fija si los postulantes sobrantes 
+	de dicha materia pueden ser agregados a la lista de ayudantes disponibles*/
+	public void agregarAyudanteMateria(int idMateria, int idAyudante){
+		Postulante p = this.postulantes.get(idAyudante);
+		p.restarMateriaPendiente();
+		for(Materia mat : this.materias){
+			if (mat.getId()==idMateria){
+				mat.addAyudante(p);
+				if(mat.materiaCompleta()){
+					for (Postulante pos : mat.getPostulantes()){
+						pos.restarMateriaPendiente();
+						if (pos.getMateriasPendientes() == 0){
+							this.postulantesDisponibles.add(p);
+						}
+					}
+				}
+			}
+			else{
+				return;
 			}
 		}
+	}
+
+	//recorre todas las materias y en cada una solicita enviar las invitaciones a postulantes graduados y alumnos
+    public void asignarAyudantes(){
+		for(Materia mat : this.materias) {
+			mat.solicitarAyudantesGraduados(this.mailService);
+			mat.solicitarAyudantes(this.mailService);
+		}
     }
+
+	//dada una materia se envian las solicitudes para intentar completar la ayudantia de la misma
+	public void asignarAyudanteMateria(int idMateria){
+		for(Materia mat : this.materias){
+			if (mat.getId()==idMateria){
+				mat.solicitarAyudantes(this.mailService);
+				return;
+			}
+		}
+	}
+
+	//retorna un ayudante disponible, un ayudante disponible es aquel que no como postulante en ninguna materia que no este completa
+	public Postulante postulanteDisponible(){
+		for (Postulante p : this.postulantesDisponibles){
+			if (p.disponibleAyudantia()){
+				return p;
+			}
+		}
+		return null;
+	}
 
 	//Obtener ayudantes de una materia por ID. Utilizado una vez que se realizaron las asignaciones
     public List<Postulante> ayudantesMateria(int id) {

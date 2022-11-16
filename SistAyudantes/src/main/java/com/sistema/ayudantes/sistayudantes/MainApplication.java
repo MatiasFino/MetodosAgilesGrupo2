@@ -26,7 +26,7 @@ public class MainApplication extends Application {
     public static void main(String[] args) throws IOException {
         APIEndpoints.configureRoutes();
         EmailService mailService = new EmailService();
-        Controller c= new Controller(mailService);
+        Controller c= Controller.getInstance(mailService);
         c.cargarMaterias("cuantificador-grupo1.csv");
         c.cargarPostulantes("orden-merito.csv");
         launch();

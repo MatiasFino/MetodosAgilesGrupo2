@@ -1,12 +1,15 @@
 package com.sistema.ayudantes.sistayudantes;
 
 public class Postulante {
+	private static final int MAX_AYU_GRADUADO = 3;
+	private static final int MAX_AYU_ALUMNO = 1;
 	private int id; //dni
 	private char tipo; //graduado/alummno
 	private String apellido_nombre;
 	private String email;
 	private int cant_horas;
 	private int cant_materias; 
+	private int cant_materias_pendientes;
 	
 	public Postulante(int id, char tipo, String ap, String email, int cant_horas, int cant_materias) {
 		this.id=id;
@@ -15,6 +18,7 @@ public class Postulante {
 		this.email=email;
 		this.cant_horas=cant_horas;
 		this.cant_materias= cant_materias;
+		this.cant_materias_pendientes = 0;
 	}
 	
 	@Override
@@ -38,6 +42,18 @@ public class Postulante {
 		return apellido_nombre;
 	}
 
+	public void addMateriaPendiente(){
+		this.cant_materias_pendientes++;
+	}
+
+	public void restarMateriaPendiente(){
+		this.cant_materias_pendientes--;
+	}
+
+	public int getMateriasPendientes(){
+		return this.cant_materias_pendientes;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -49,8 +65,23 @@ public class Postulante {
 	public int getCant_materias() {
 		return cant_materias;
 	}
+
+	public void addMateria(){
+		this.cant_materias++ ;
+	}
+
+	public boolean isGraduado(){
+		return this.tipo == "G".charAt(0);
+	}
 	
-	
+	public boolean disponibleAyudantia(){
+		if (this.tipo == "G".charAt(0)) {
+			return this.cant_materias < MAX_AYU_GRADUADO;
+		}
+		else {
+			return this.cant_materias < MAX_AYU_ALUMNO;
+		}
+	}
 	
 
 
