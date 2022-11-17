@@ -36,6 +36,7 @@ public class InterfaceController implements Initializable {
     @FXML private Text txtNotification = new Text("Notifications");
     private ArrayList<Materia> subjectsList;
     private TableColumn<Materia,String> subjectsColumn = new TableColumn<Materia,String>("Materias");
+    private TableColumn<Materia,String> estadoMateria= new TableColumn<Materia,String>("Estado");
 
     private  ObservableList<Materia> s = FXCollections.observableList(createStringList());
 
@@ -45,11 +46,13 @@ public class InterfaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //se transforma una lista de un objeto en una observableArrayList
-        subjectsTable.setItems(s);
+        try {
+            subjectsTable.setItems(FXCollections.observableList(createStringList()));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //TableColumn<Materia, String> subjectsColumn = new TableColumn<Materia, String>("Materias");
-        TableColumn<Materia,String> estadoMateria= new TableColumn<Materia,String>("Estado");
         subjectsTable.setMinSize(842, 345);
         subjectsTable.setMaxSize(842, 1200);
 
@@ -62,11 +65,21 @@ public class InterfaceController implements Initializable {
         estadoMateria.setMaxWidth(subjectsTable.getMaxWidth());
         estadoMateria.setMinWidth(subjectsTable.getMinWidth()/2);
         subjectsTable.getColumns().addAll(subjectsColumn,estadoMateria);
-        colorear(subjectsColumn);
-        contarEstado();
-        colorearEstado(estadoMateria);
+        actualizarVista();
     }
 
+    public void actualizarVista(){
+                //se transforma una lista de un objeto en una observableArrayList
+                try {
+                    subjectsTable.setItems(FXCollections.observableList(createStringList()));
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                colorear(subjectsColumn);
+                contarEstado();
+                colorearEstado(estadoMateria);
+    }
 
     public void contarEstado(){
         for(int i = 0; i < subjectsList.size();i++){
@@ -173,9 +186,11 @@ public class InterfaceController implements Initializable {
     }
 
     public void onSubjectsButtonClicked(MouseEvent event){ //PASA A LA SECCION DE MATERIAS
+        actualizarVista();
         subjectsPanel.setVisible(true);
         principalPanel.setVisible(false);
         assistantsPanel.setVisible(false);
+
     }
 
 
@@ -186,9 +201,14 @@ public class InterfaceController implements Initializable {
     }
 
     public void onBackSubjectsPanelButtonClicked(MouseEvent event){ //VUELVE A LA LISTA DE MATERIAS
+        actualizarVista();
         subjectsPanel.setVisible(true);
         principalPanel.setVisible(false);
         assistantsPanel.setVisible(false);
+    }
+
+    public void onRefreshButtonClicked(MouseEvent event){ //Refresh
+        actualizarVista();
     }
 
 

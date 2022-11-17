@@ -24,9 +24,7 @@ public class MainApplication extends Application {
         Controller c= Controller.getInstance();
         c.cargarMaterias("cuantificador-grupo1.csv");
         c.cargarPostulantes("orden-merito.csv");
-        launch();
-        c.imprimirPostulantesxMateria();
-        c.imprimirTotalPostulates();
         c.asignarAyudantes();
+        launch();
     }
 }

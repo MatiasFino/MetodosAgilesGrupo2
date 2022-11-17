@@ -76,7 +76,6 @@ public class Materia {
     }
 
     public void enviarMail(Postulante postulante){
-        //System.out.println("se envio mail a "+nombrePos+" por para de la materia"+this.nombre);
         AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
 		UUID token = UUID.randomUUID();
 		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(this.getId()), token.toString()));
@@ -104,7 +103,7 @@ public class Materia {
     }
 
     public int getCantAyudantes() {
-    	return this.cantAyudantes + this.cantGraduados;
+    	return this.cantAyudantes;
     }
     
     public void restarSolicitudEnviada(){

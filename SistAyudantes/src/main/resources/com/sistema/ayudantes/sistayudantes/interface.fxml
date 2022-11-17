@@ -62,6 +62,15 @@
                   <Image url="@images/volver.png" />
                </image>
             </ImageView>
+            <Button fx:id="refresh" layoutX="800.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onRefreshButtonClicked" prefHeight="32.0" prefWidth="32.0" stylesheets="@estilo.css">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="800.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button fx:id="viewAssistants" layoutX="487.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#onViewAssistantsChoiceClicked" prefHeight="32.0" prefWidth="118.0" stylesheets="@estilo.css" text="Ver ayudantes">
                <font>
                   <Font name="Tw Cen MT" size="16.0" />

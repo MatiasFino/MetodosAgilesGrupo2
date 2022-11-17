@@ -164,7 +164,6 @@ public class Controller {
 	}
 
 	public void enviarMail(Postulante postulante, Materia materia) {
-		//System.out.println("se envio mail a "+nombrePos+" por para de la materia"+nombreMat+" la cual era una materia que no se postulo");
 		AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
 		UUID token = UUID.randomUUID();
 		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(materia.getId()), token.toString()));
