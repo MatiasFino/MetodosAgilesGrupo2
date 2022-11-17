@@ -8,6 +8,7 @@ module com.sistema.ayudantes.sistayudantes {
     requires okhttp3;
     requires jdk.jfr;
     requires javax.mail.api;
+    requires quartz;
 
 
     opens com.sistema.ayudantes.sistayudantes to javafx.fxml;
