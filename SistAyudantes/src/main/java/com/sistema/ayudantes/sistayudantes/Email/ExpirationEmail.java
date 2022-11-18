@@ -191,7 +191,7 @@ public class ExpirationEmail {
                 "                                                    <p style=\"margin: 0;\">Nos comunicamos para informarle que se ha\n" +
                 "                                                        cumplido el plazo de 72 horas para aceptar o rechazar la ayudantia de la materia \n" +
                 "                                                        "+ materia+", por lo tanto, esa solicitud ha expirado\n" +
-                "                                                            aceptar la ayudantía\n" +
+                "                                                            y se considera como rechazada\n" +
                 "                                                    </p>\n" +
                 "                                                </div>\n" +
                 "                                            </td>\n" +
