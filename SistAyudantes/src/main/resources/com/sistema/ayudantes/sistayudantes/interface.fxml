@@ -16,9 +16,9 @@
     <children>
         <AnchorPane fx:id="principalPanel" layoutX="-50.0" prefHeight="575.0" prefWidth="879.0" stylesheets="@estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fitHeight="83.0" fitWidth="224.0" layoutX="624.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="91.0" fitWidth="300.0" layoutX="531.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/LogoExactas.png" />
+                        <Image url="@../../../../../../../../../../../Downloads/logo_blanco.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="subjectsButton" contentDisplay="CENTER" layoutX="335.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onSubjectsButtonClicked" prefHeight="32.0" prefWidth="209.0" stylesheets="@estilo.css" text="Ver lista de materias" textAlignment="JUSTIFY">
@@ -79,28 +79,20 @@
                <font>
                   <Font name="Tw Cen MT" size="15.0" />
                </font></Text>
-            <HBox fx:id="Barra" layoutY="-7.0" prefHeight="50.0" prefWidth="879.0" stylesheets="@estilo.css">
+            <TableView fx:id="subjectsTable" layoutX="19.0" layoutY="70.0" prefHeight="411.0" prefWidth="842.0" stylesheets="@estilo.css" />
+            <HBox id="Barra" prefHeight="50.0" prefWidth="879.0" stylesheets="@estilo.css">
                <children>
-                  <ImageView fitHeight="38.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
+                  <Separator prefHeight="11.0" prefWidth="811.0" visible="false" />
+                  <ImageView fitHeight="43.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/usuario.png" />
-                     </image>
-                  </ImageView>
-                  <Separator prefHeight="3.0" prefWidth="699.0" />
-                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/LogoExactas.png" />
+                        <Image url="@images/personas.png" />
                      </image>
                      <HBox.margin>
-                        <Insets top="6.0" />
+                        <Insets top="4.0" />
                      </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
-            <TableView fx:id="subjectsTable" layoutX="19.0" layoutY="66.0" prefHeight="411.0" prefWidth="842.0" stylesheets="@estilo.css" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="assistantsPanel" layoutY="-4.0" prefHeight="583.0" prefWidth="870.0" visible="false">
@@ -129,23 +121,15 @@
                   <Font name="Tw Cen MT" size="27.0" />
                </font>
             </Label>
-            <HBox fx:id="Barra2" prefHeight="48.0" prefWidth="880.0" stylesheets="@estilo.css">
+            <HBox id="Barra" prefHeight="56.0" prefWidth="880.0" stylesheets="@estilo.css">
                <children>
-                  <ImageView fitHeight="38.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets left="10.0" top="7.0" />
-                     </HBox.margin>
+                  <Separator prefHeight="11.0" prefWidth="811.0" visible="false" />
+                  <ImageView fitHeight="43.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/usuario.png" />
-                     </image>
-                  </ImageView>
-                  <Separator prefHeight="0.0" prefWidth="704.0" />
-                  <ImageView fitHeight="42.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/LogoExactas.png" />
+                        <Image url="@images/personas.png" />
                      </image>
                      <HBox.margin>
-                        <Insets top="6.0" />
+                        <Insets top="4.0" />
                      </HBox.margin>
                   </ImageView>
                </children>

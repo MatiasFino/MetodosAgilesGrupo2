@@ -48,4 +48,36 @@ public class EmailSender {
             return 500;
         }
     }
+
+
+   public static int notificarAyudanteNoPostuldo(Postulante postulante, Materia materia, UUID token) {
+        try {
+            EmailService emailSend = EmailService.getInstance();
+            String emailHTML = AlternativeEmail.buildEmail(
+                    postulante.getApellido_nombre(),
+                    materia.getNombre(),
+                    Integer.toString(postulante.getId()),
+                    Integer.toString(materia.getId()),
+                    token.toString()
+            );
+            emailSend.sendEmail(postulante.getEmail(), emailHTML);
+            return 200;
+        } catch (Exception e) {
+            return 500;
+        }
+    }
+
+    public static int notificarSolicitudCaducada(Postulante postulante, Materia materia) {
+        try {
+            EmailService emailSend = EmailService.getInstance();
+            String emailHTML = ExpirationEmail.buildEmail(
+                    postulante.getApellido_nombre(),
+                    materia.getNombre()
+            );
+            emailSend.sendEmail(postulante.getEmail(), emailHTML);
+            return 200;
+        } catch (Exception e) {
+            return 500;
+        }
+    } 
 }
