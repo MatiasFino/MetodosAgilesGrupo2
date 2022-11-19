@@ -7,6 +7,7 @@ import com.sistema.ayudantes.sistayudantes.DatabaseManager.Materia.MateriaDTO;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.Persona.PersonaDTO;
 import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
+import com.sistema.ayudantes.sistayudantes.Scheduler.JobScheduler;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -168,6 +169,7 @@ public class Controller {
 		UUID token = UUID.randomUUID();
 		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(materia.getId()), token.toString()));
 		EmailSender.notificarAyudanteNoPostulado(postulante, materia, token);
+		JobScheduler.expirationMail(postulante, materia);
 	}
 
 
