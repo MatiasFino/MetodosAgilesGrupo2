@@ -167,8 +167,7 @@ public class Controller {
 		AlmacenamientoTokenCollection atc = AlmacenamientoTokenCollection.getInstance();
 		UUID token = UUID.randomUUID();
 		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(materia.getId()), token.toString()));
-		//Se debe cambiar la funcion para que envie el mail de notificar a una persona que se postulo a otra materia
-		EmailSender.notificarAyudanteNoPostuldo(postulante, materia, token);
+		EmailSender.notificarAyudanteNoPostulado(postulante, materia, token);
 	}
 
 

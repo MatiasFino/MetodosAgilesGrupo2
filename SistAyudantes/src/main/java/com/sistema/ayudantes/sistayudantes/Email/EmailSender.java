@@ -27,7 +27,7 @@ public class EmailSender {
     }
 
 
-   public static int notificarAyudanteNoPostuldo(Postulante postulante, Materia materia, UUID token) {
+   public static int notificarAyudanteNoPostulado(Postulante postulante, Materia materia, UUID token) {
         try {
             EmailService emailSend = EmailService.getInstance();
             String emailHTML = AlternativeEmail.buildEmail(
