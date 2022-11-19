@@ -1,10 +1,6 @@
 package com.sistema.ayudantes.sistayudantes.Frontend;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
-
-import java.util.ArrayList;
 
 public class Materia {
     private Label nombre;

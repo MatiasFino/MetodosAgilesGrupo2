@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed6156d3-19be-47c2-ad74-abd5919e1402" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/images/usuario.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/java/com/sistema/ayudantes/sistayudantes/InterfaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/src/main/resources/com/sistema/ayudantes/sistayudantes/interface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SistAyudantes/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/SistAyudantes/.idea/.name" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +79,7 @@
       <workItem from="1666272837772" duration="912000" />
       <workItem from="1666273806604" duration="9000" />
       <workItem from="1666276937636" duration="608000" />
+      <workItem from="1668796923771" duration="158000" />
     </task>
     <servers />
   </component>
