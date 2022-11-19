@@ -1,6 +1,5 @@
 package com.sistema.ayudantes.sistayudantes.Frontend;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
 
 public class Ayudante {

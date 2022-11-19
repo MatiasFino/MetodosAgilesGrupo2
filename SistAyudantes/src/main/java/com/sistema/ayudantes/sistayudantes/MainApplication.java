@@ -1,6 +1,8 @@
 package com.sistema.ayudantes.sistayudantes;
 
 import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
+import com.sistema.ayudantes.sistayudantes.Scheduler.JobSchedulerWrapper;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ public class MainApplication extends Application {
     
     public static void main(String[] args) throws IOException {
         APIEndpoints.configureRoutes();
+        JobSchedulerWrapper.getInstance().start();
         Controller c= Controller.getInstance();
         c.cargarMaterias("cuantificador-grupo1.csv");
         c.cargarPostulantes("orden-merito.csv");

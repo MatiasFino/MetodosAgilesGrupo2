@@ -9,7 +9,7 @@ import java.util.UUID;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenDTO;
 import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
-import com.sistema.ayudantes.sistayudantes.Email.EmailService;
+import com.sistema.ayudantes.sistayudantes.Scheduler.JobScheduler;
 
 public class Materia {
     private int id;
@@ -80,6 +80,7 @@ public class Materia {
 		UUID token = UUID.randomUUID();
 		atc.insert(new AlmacenamientoTokenDTO(Integer.toString(postulante.getId()), Integer.toString(this.getId()), token.toString()));
 		EmailSender.notificarAyudante(postulante, this, token);
+        JobScheduler.expirationMail(postulante, this);
     }
 
     public void removePostulante (Postulante p){

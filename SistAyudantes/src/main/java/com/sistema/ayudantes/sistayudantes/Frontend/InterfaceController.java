@@ -38,8 +38,6 @@ public class InterfaceController implements Initializable {
     private TableColumn<Materia,String> subjectsColumn = new TableColumn<Materia,String>("Materias");
     private TableColumn<Materia,String> estadoMateria= new TableColumn<Materia,String>("Estado");
 
-    private  ObservableList<Materia> s = FXCollections.observableList(createStringList());
-
     public InterfaceController() throws IOException {
     }
 
