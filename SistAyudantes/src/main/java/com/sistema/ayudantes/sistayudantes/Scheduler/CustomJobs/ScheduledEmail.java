@@ -2,6 +2,7 @@ package com.sistema.ayudantes.sistayudantes.Scheduler.CustomJobs;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
+import com.sistema.ayudantes.sistayudantes.API.APIEndpoints;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AlmacenamientoToken.AlmacenamientoTokenCollection;
 import com.sistema.ayudantes.sistayudantes.DatabaseManager.AsignacionMateria.AsignacionMateriaCollection;
 import com.sistema.ayudantes.sistayudantes.Email.EmailSender;
@@ -30,6 +31,7 @@ public class ScheduledEmail implements Job {
             if (!asignaciones.iterator().hasNext()) {
                 AlmacenamientoTokenCollection coleccionAlmacenamiento = AlmacenamientoTokenCollection.getInstance();
                 coleccionAlmacenamiento.delete(idPersona, idMateria);
+                APIEndpoints.descartarPostulante(idPersona, idMateria);
                 EmailSender.expiracionInvitacion(nombrePersona, nombreMateria, email);
             }
         } catch (Exception exception) {

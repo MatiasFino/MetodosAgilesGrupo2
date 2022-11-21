@@ -122,7 +122,7 @@ public class APIEndpoints {
             return "Ya habiamos registrado tu respuesta";
     };
 
-    private static boolean descartarPostulante(String id_persona, String id_materia){
+    public static boolean descartarPostulante(String id_persona, String id_materia){
         Controller controllerIns = Controller.getInstance();
         controllerIns.rechazarSolicitud(Integer.parseInt(id_materia),Integer.parseInt(id_persona));
         AsignacionMateriaCollection asignacionMateriaCollection = AsignacionMateriaCollection.getInstance();

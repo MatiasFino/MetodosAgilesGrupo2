@@ -1,8 +1,6 @@
 package com.sistema.ayudantes.sistayudantes;
 
 public class Postulante {
-	private static final int MAX_AYU_GRADUADO = 3;
-	private static final int MAX_AYU_ALUMNO = 1;
 	private int id; //dni
 	private char tipo; //graduado/alummno
 	private String apellido_nombre;
@@ -76,10 +74,10 @@ public class Postulante {
 	
 	public boolean disponibleAyudantia(){
 		if (this.tipo == "G".charAt(0)) {
-			return this.cant_materias < MAX_AYU_GRADUADO;
+			return this.cant_materias < Constants.MAX_AYUDANTIAS_GRADUADO;
 		}
 		else {
-			return this.cant_materias < MAX_AYU_ALUMNO;
+			return this.cant_materias < Constants.MAX_AYUDANTIAS_ALUMNO;
 		}
 	}
 	
